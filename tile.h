@@ -6,14 +6,13 @@
 
 class Tile {
 public:
-    Tile();
-    Tile(int x, int y, Piece piece);
+    Tile(int x = 0, int y = 0, Piece *piece = nullptr);
     void print();
     int get_x();
     int get_y();
 private:
     int x;
     int y;
-    Piece piece;
+    Piece *piece;
 };
 #endif

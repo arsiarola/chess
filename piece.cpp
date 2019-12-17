@@ -11,8 +11,4 @@ string Piece::get_name() {
     return name;
 }
 
-int main() {
-    Piece piece;
-    cout << piece.get_name();
-    return 0;
-}
+

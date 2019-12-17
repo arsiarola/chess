@@ -1,5 +1,5 @@
-#ifndef PIECE_H
-#define PIECE_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include "tile.h"
 

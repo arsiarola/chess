@@ -5,7 +5,7 @@
 #include "../piece.h"
 
 class Empty : public Piece {
-    Empty(std::string = " ", int x = 0, int y = 0, int color = 0);
+    Empty(std::string name_= " ",  int color_ = 0);
     bool move();
 };
 

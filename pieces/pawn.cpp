@@ -1,4 +1,12 @@
+#include <string>
 #include "pawn.h"
+
+using namespace std;
+
+Pawn::Pawn(string name_, int color_) {
+    name = name_;
+    color = color_;
+}
 
 bool Pawn::move(Tile from, Tile to) {
     int x_diff = to.get_x() - from.get_x();

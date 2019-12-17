@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
+BLACK	piece.cpp	/^#define BLACK /;"	d	file:
+DOWN	pieces/pawn.h	/^#define DOWN /;"	d
+PAWN_H	pieces/pawn.h	/^#define PAWN_H$/;"	d
+PIECE_H	piece.h	/^#define PIECE_H$/;"	d
+Pawn	pieces/pawn.h	/^class Pawn : public Piece {$/;"	c
+Piece	piece.cpp	/^Piece::Piece(std::string name_, int x_, int y_, int color_) {$/;"	f	class:Piece
+Piece	piece.h	/^class Piece {$/;"	c
+UP	pieces/pawn.h	/^#define UP /;"	d
+WHITE	piece.cpp	/^#define WHITE /;"	d	file:
+color	piece.h	/^    int color;$/;"	m	class:Piece	typeref:typename:int
+get_name	piece.cpp	/^string Piece::get_name() {$/;"	f	class:Piece	typeref:typename:string
+get_x	piece.cpp	/^int Piece::get_x() {$/;"	f	class:Piece	typeref:typename:int
+get_y	piece.cpp	/^int Piece::get_y() {$/;"	f	class:Piece	typeref:typename:int
+main	piece.cpp	/^int main() {$/;"	f	typeref:typename:int
+move	piece.h	/^    virtual bool move() {};$/;"	f	class:Piece	typeref:typename:bool
+move	pieces/pawn.cpp	/^bool Pawn::move(int x_, int y_) {$/;"	f	class:Pawn	typeref:typename:bool
+name	piece.h	/^    std::string name;$/;"	m	class:Piece	typeref:typename:std::string
+x	piece.h	/^    int x;$/;"	m	class:Piece	typeref:typename:int
+y	piece.h	/^    int y;$/;"	m	class:Piece	typeref:typename:int

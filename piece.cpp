@@ -1,4 +1,3 @@
-#include <iostream>
 #include "piece.h"
 
 using namespace std;
@@ -12,3 +11,6 @@ string Piece::get_name() {
 }
 
 
+bool Piece::move(){
+    return false;
+}

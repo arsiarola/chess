@@ -35,6 +35,7 @@ get_x	tile.cpp	/^int Tile::get_x() {$/;"	f	class:Tile	typeref:typename:int
 get_y	tile.cpp	/^int Tile::get_y() {$/;"	f	class:Tile	typeref:typename:int
 init_board	board.cpp	/^void Board::init_board() {$/;"	f	class:Board	typeref:typename:void
 main	main.cpp	/^int main() {$/;"	f	typeref:typename:int
+move	piece.cpp	/^bool Piece::move(){$/;"	f	class:Piece	typeref:typename:bool
 move	pieces/empty.cpp	/^bool Empty::move() {$/;"	f	class:Empty	typeref:typename:bool
 move	pieces/pawn.cpp	/^bool Pawn::move(Tile from, Tile to) {$/;"	f	class:Pawn	typeref:typename:bool
 name	piece.h	/^    std::string name;$/;"	m	class:Piece	typeref:typename:std::string

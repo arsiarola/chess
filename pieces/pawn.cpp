@@ -1,12 +1,12 @@
 #include "pawn.h"
 
-bool Pawn::move(int x_, int y_) {
-    int diff = x_ - x;
-    int y_diff = y_ - y;
+bool Pawn::move(Tile from, Tile to) {
+    int x_diff = to.get_x() - from.get_x();
+    int y_diff = to.get_y() - from.get_y();
 
 
     // Tried to move sideways
-    if (color x_diff != 0) {
+    if (x_diff != 0) {
         return false;
     }
 

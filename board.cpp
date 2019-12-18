@@ -12,6 +12,8 @@
 #include "macros.h"
 #include "tools.h"
 
+using std::cout;
+
 void Board::players_turn() {
     std::string coordinates;
     std::string from;
@@ -22,31 +24,35 @@ void Board::players_turn() {
     while (true) {
         ask_for_coordinates(coordinates);
         if (!valid_coordinates(coordinates, from_tile, to_tile)) {
-            system("clear");
-            print();
-            std::cout << "Please Enter two valid coordinates e.g. a1 b1\n";
+            /* system("clear"); */
+            /* print(); */
+            cout << "Please Enter two valid coordinates e.g. a1 b1\n";
+            continue;
         }
-        std::cout << "from: " << from_tile << "\n";
-        std::cout << "to: " << to_tile << "\n";
+        cout << "from: " << from_tile << "\n";
+        cout << "to: " << to_tile << "\n";
 
+        break;
     }
 }
 
 bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
-    if (coordinates.size() < 5) {
+    if (coordinates.length() < 5) {
+        cout << "Input string was too short\n";
         return false;
     }
 
-    char from_x = coordinates[0];
-    int from_y = coordinates[1];
-    char to_x = coordinates[3];
-    int to_y = coordinates[4];
-
-    if (!valid_y(from_y) || !valid_y(to_y)) {
-        return false;
-    }
+// having - '0' will basically convert from char to int
+    int from_x = coordinates[0] - 16 - '0';
+    int from_y = coordinates[1] - '0';
+    int to_x = coordinates[3] - 16 - '0';
+    int to_y = coordinates[4] - '0';
 
     if (!valid_x(from_x) || !valid_x(to_x)) {
+        return false;
+    }
+
+    if (!valid_y(from_y) || !valid_y(to_y)) {
         return false;
     }
 
@@ -56,24 +62,17 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
     return true;
 }
 
-int coordinate_to_tile_num(int x_, int y_) {
+int Board::coordinate_to_tile_num(int x_, int y_) {
+    cout << "x_ = " << x_ << "\n";
+    cout << "y_ = " << y_ << "\n";
     int x = x_ - MIN_WIDTH;
     int y = abs(y_ - BOARD_HEIGHT);
-    return x + y;
+    return x + (y * BOARD_WIDTH);
 }
 
-void split_coordinates(std::string coordinates, std::string from, std::string to) {
-    if (!valid_coordinates(coordinates)) {
-        return;
-    }
-
-    from = coordinates[0] + coordinates[1];
-    to = coordinates[3] + coordinates[5];
-}
-
-void Board::ask_for_coordinates(std::string coordinates) {
-    std::cout << "Enter the coordinates: ";
-    std::cin >> coordinates;
+void Board::ask_for_coordinates(std::string &coordinates) {
+    cout << "Enter the coordinates: ";
+    std::getline(std::cin, coordinates);
     for (auto & c: coordinates) c = toupper(c);
 }
 
@@ -104,14 +103,14 @@ void Board::init_board() {
 }
 
 void Board::print() {
-    std::cout << "  abcdefgh\n\n";
+    cout << "  abcdefgh\n\n";
     for (int y = BOARD_HEIGHT-1; y >= 0; --y) {
-        std::cout << y+1 << " ";
+        cout << y+1 << " ";
         for (int x = 0; x < BOARD_WIDTH; ++x) {
             board[x][y].print();
         }
-        std::cout << " " << y+1 << "\n";
+        cout << " " << y+1 << "\n";
     }
-    std::cout << "  abcdefgh\n";
+    cout << "  abcdefgh\n";
 }
 

@@ -18,10 +18,9 @@ public:
     void players_turn();
 private:
     int coordinate_to_tile_num(int x, int y);
-    void split_coordinates(std::string coordinates, std::string from, std::string to);
     bool valid_coordinates(std::string coordinates, int &from_num, int &to_num);
-    void ask_for_coordinates(std::string coordinates);
-    bool coordinates_to_int(std::string coordinates, int &, int &, int &, int &);
+    void ask_for_coordinates(std::string &coordinates);
+
     Tile board[BOARD_WIDTH][BOARD_HEIGHT];
 };
 

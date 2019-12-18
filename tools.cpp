@@ -7,6 +7,7 @@
 using namespace std;
 
 bool valid_y(int y) {
+    cout << "this is y: " << y << "\n";
     if (y > MAX_HEIGHT ||  y < MIN_HEIGHT) {
         cout << "Wrong coordinate\n";
         return false;
@@ -16,9 +17,11 @@ bool valid_y(int y) {
 
 
 bool valid_x(int x) {
-    if (x > MAX_WIDTH ||  x < MIN_WIDTH )
+    cout << "this is x: " << x << "\n";
+    if (x > MAX_WIDTH ||  x < MIN_WIDTH ) {
         cout << "Wrong coordinate\n";
-    return false;
+        return false;
+    }
     return true;
 }
 

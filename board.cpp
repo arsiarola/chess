@@ -21,24 +21,44 @@ void Board::players_turn() {
 
     while (true) {
         ask_for_coordinates(coordinates);
-        if (!valid_coordinates(coordinates)) {
+        if (!valid_coordinates(coordinates, from_tile, to_tile)) {
             system("clear");
             print();
             std::cout << "Please Enter two valid coordinates e.g. a1 b1\n";
         }
-
-        split_coordinates(coordinates, from, to);
-        from_tile = coordinate_to_tile_num(from);
-        to_tile = coordinate_to_tile_num(to);
         std::cout << "from: " << from_tile << "\n";
         std::cout << "to: " << to_tile << "\n";
 
     }
 }
 
-int coordinate_to_tile_num(std::string coordinates) {
-    int x = coordinates[0] - MIN_WIDTH;
-    int y = abs(coordinates[1] - BOARD_HEIGHT);
+bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
+    if (coordinates.size() < 5) {
+        return false;
+    }
+
+    char from_x = coordinates[0];
+    int from_y = coordinates[1];
+    char to_x = coordinates[3];
+    int to_y = coordinates[4];
+
+    if (!valid_y(from_y) || !valid_y(to_y)) {
+        return false;
+    }
+
+    if (!valid_x(from_x) || !valid_x(to_x)) {
+        return false;
+    }
+
+    from_num = coordinate_to_tile_num(from_x, from_y);
+    to_num = coordinate_to_tile_num(to_x, to_y);
+
+    return true;
+}
+
+int coordinate_to_tile_num(int x_, int y_) {
+    int x = x_ - MIN_WIDTH;
+    int y = abs(y_ - BOARD_HEIGHT);
     return x + y;
 }
 

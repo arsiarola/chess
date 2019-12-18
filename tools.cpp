@@ -5,26 +5,6 @@
 #include <stdio.h>
 
 using namespace std;
-bool valid_coordinates(string coordinates) {
-    if (coordinates.size() < 5) {
-        return false;
-    }
-
-    char from_x = coordinates[0];
-    int from_y = coordinates[1];
-    char to_x = coordinates[3];
-    int to_y = coordinates[4];
-
-    if (!valid_y(from_y) || !valid_y(to_y)) {
-        return false;
-    }
-
-    if (!valid_x(from_x) || !valid_x(to_x)) {
-        return false;
-    }
-
-    return true;
-}
 
 bool valid_y(int y) {
     if (y > MAX_HEIGHT ||  y < MIN_HEIGHT) {

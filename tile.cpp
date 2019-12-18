@@ -9,8 +9,13 @@ Tile::Tile(int x_, int y_, Piece *piece_) {
 }
 
 void Tile::print() {
-    if (piece != nullptr) {
-        cout << piece->get_name();
+    // empty tile
+    if (piece == nullptr) {
+        cout << " ";
+    }
+
+    else {
+        piece->print();
     }
 }
 

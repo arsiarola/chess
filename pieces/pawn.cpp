@@ -3,14 +3,14 @@
 
 using namespace std;
 
-Pawn::Pawn(string name_, int color_) {
-    name = name_;
+Pawn::Pawn(int color_) {
     color = color_;
+    name = "P";
 }
 
-bool Pawn::move(Tile from, Tile to) {
-    int x_diff = to.get_x() - from.get_x();
-    int y_diff = to.get_y() - from.get_y();
+bool Pawn::move(int from_x, int from_y, int to_x, int to_y, Board &board) {
+    int x_diff = from_x - to_x;
+    int y_diff = from_y - to_y;;
 
 
     // Tried to move sideways

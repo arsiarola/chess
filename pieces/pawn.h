@@ -7,8 +7,9 @@
 #define DOWN 1
 
 class Pawn : public Piece {
-    Pawn(std::string = "P", int color = 0);
-    bool move(Tile, Tile);
+public:
+    bool move(int from_x, int from_y, int to_x, int to_y, Board &board);
+    Pawn(int color_ = 0);
 };
 
 

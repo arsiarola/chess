@@ -1,5 +1,4 @@
 #include "tile.h"
-#include "pieces/empty.h"
 #include <iostream>
 using namespace std;
 

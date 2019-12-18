@@ -18,11 +18,11 @@ bool Pawn::move(Tile from, Tile to) {
         return false;
     }
 
-    if (y_diff == UP && color = WHITE) {
+    if (y_diff == UP && color == WHITE) {
         return true;
     }
 
-    else if (y_diff == DOWN && color = BLACK) {
+    else if (y_diff == DOWN && color == BLACK) {
         return true;
     }
 

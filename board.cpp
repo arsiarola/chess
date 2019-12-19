@@ -33,7 +33,7 @@ void Board::players_turn() {
             continue;
         }
 
-        board[from_tile]->move(board[from_tile], board[to_tile],
+        /* board[from_tile]->move(board[from_tile], board[to_tile], */
 
         break;
     }

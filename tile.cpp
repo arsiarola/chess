@@ -26,3 +26,7 @@ int Tile::get_x() {
 int Tile::get_y() {
     return y;
 }
+
+Piece* Tile::get_piece() {
+    return piece;
+}

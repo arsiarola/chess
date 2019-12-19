@@ -8,6 +8,12 @@
 #define BOARD_WIDTH 8
 #define BOARD_HEIGHT 8
 
+#define MAX_HEIGHT 8
+#define MIN_HEIGHT 1
+#define MAX_WIDTH 8
+#define MIN_WIDTH 1
+
+
 
 class Board {
 public:
@@ -17,9 +23,12 @@ public:
     std::string ask_for_move();
     void players_turn();
 private:
+    void refresh_screen(std::string message = "");
     int coordinate_to_tile_num(int x, int y);
     bool valid_coordinates(std::string coordinates, int &from_num, int &to_num);
     void ask_for_coordinates(std::string &coordinates);
+    bool valid_y(int y);
+    bool valid_x(int x);
 
     Tile board[BOARD_WIDTH][BOARD_HEIGHT];
 };

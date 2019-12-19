@@ -16,24 +16,33 @@ using std::cout;
 
 void Board::players_turn() {
     std::string coordinates;
-    std::string from;
-    std::string to;
     int from_tile;
     int to_tile;
 
     while (true) {
         ask_for_coordinates(coordinates);
         if (!valid_coordinates(coordinates, from_tile, to_tile)) {
-            /* system("clear"); */
-            /* print(); */
-            cout << "Please Enter two valid coordinates e.g. a1 b1\n";
+            refresh_screen("Invalid coordinates\n");
             continue;
         }
         cout << "from: " << from_tile << "\n";
         cout << "to: " << to_tile << "\n";
 
+        if (board[from_tile]->get_piece() == nullptr) {
+            refresh_screen("No piece found to be moved\n");
+            continue;
+        }
+
+        board[from_tile]->move(board[from_tile], board[to_tile],
+
         break;
     }
+}
+
+void Board::refresh_screen(std::string message) {
+            system("clear");
+            print();
+            cout << message;
 }
 
 bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
@@ -42,11 +51,13 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
         return false;
     }
 
-// having - '0' will basically convert from char to int
+// having - '0' will convert from char to int
+    // for x axel we need -16 since it's an uppercase letter and we want e.g. A to represent 1
     int from_x = coordinates[0] - 16 - '0';
+    int to_x = coordinates[3]   - 16 - '0';
+
     int from_y = coordinates[1] - '0';
-    int to_x = coordinates[3] - 16 - '0';
-    int to_y = coordinates[4] - '0';
+    int to_y = coordinates[4]   - '0';
 
     if (!valid_x(from_x) || !valid_x(to_x)) {
         return false;
@@ -74,6 +85,16 @@ void Board::ask_for_coordinates(std::string &coordinates) {
     cout << "Enter the coordinates: ";
     std::getline(std::cin, coordinates);
     for (auto & c: coordinates) c = toupper(c);
+}
+
+bool Board::valid_x(int x) {
+    cout << "this is x: " << x << "\n";
+    return (x <= MAX_WIDTH &&  x >= MIN_WIDTH );
+}
+
+bool Board::valid_y(int y) {
+    cout << "this is y: " << y << "\n";
+    return (y <= MAX_HEIGHT &&  y >= MIN_HEIGHT );
 }
 
 void Board::init_board() {

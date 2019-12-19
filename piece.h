@@ -3,6 +3,7 @@
 
 class Piece;
 class Board;
+class Tile;
 
 #include <string>
 #include "macros.h"
@@ -10,7 +11,7 @@ class Board;
 class Piece {
 public:
     Piece(std::string = "", int color = 0);
-    virtual bool move(int from_x, int from_y, int to_x, int to_y, Board &board);
+    virtual bool move(Tile , Board &board);
     std::string get_name();
     void print();
 protected:

@@ -6,25 +6,6 @@
 
 using namespace std;
 
-bool valid_y(int y) {
-    cout << "this is y: " << y << "\n";
-    if (y > MAX_HEIGHT ||  y < MIN_HEIGHT) {
-        cout << "Wrong coordinate\n";
-        return false;
-    }
-    return true;
-}
-
-
-bool valid_x(int x) {
-    cout << "this is x: " << x << "\n";
-    if (x > MAX_WIDTH ||  x < MIN_WIDTH ) {
-        cout << "Wrong coordinate\n";
-        return false;
-    }
-    return true;
-}
-
 // read a string, if input doesn't fit into string, clear input buffer
 // return true if the input fit into the string
 bool read_string(char *string, int size) {

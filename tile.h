@@ -10,6 +10,7 @@ public:
     void print();
     int get_x();
     int get_y();
+    Piece* get_piece();
 private:
     int x;
     int y;

@@ -28,7 +28,7 @@ void Board::players_turn() {
         cout << "from: " << from_tile << "\n";
         cout << "to: " << to_tile << "\n";
 
-        if (board[from_tile]->get_piece() == nullptr) {
+        if (board[from_tile]->has_piece()) {
             refresh_screen("No piece found to be moved\n");
             continue;
         }
@@ -105,13 +105,13 @@ void Board::init_board() {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
             // upper row for pawns
             if (y == pawn_place) {
-                Tile tile(x, y, new Pawn(BLACK));
+                Tile tile(x, y, std::make_unique<Pawn>(new Pawn(BLACK)));
                 board[x][y] = tile;
             }
 
             // lower row for pawns
             else if (y == BOARD_HEIGHT-1 - pawn_place) {
-                Tile tile(x, y, new Pawn(WHITE));
+                Tile tile(x, y, std::make_unique<Pawn>(new Pawn(WHITE)));
                 board[x][y] = tile;
             }
 

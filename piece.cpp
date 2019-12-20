@@ -21,14 +21,15 @@ Piece::Piece(std::string name_,  int color_) {
     color = color_;
 }
 
+Piece::Piece(const Piece &piece) {
+    name = piece.name;
+    color = piece.color;
+}
+
 string Piece::get_name() {
     return name;
 }
 
-
-bool Piece::move(int from_x, int from_y, int to_x, int to_y, Board &board){
-    return false;
-}
 
 void Piece::print() {
     if (color == BLACK) {

@@ -9,8 +9,9 @@
 class Pawn : public Piece {
 public:
     virtual bool move(int from_x, int from_y, int to_x, int to_y, Board &board);
-    Pawn(int color_ = 0);
+    Pawn(int color_);
 private:
+    using Piece::move;
 
 };
 

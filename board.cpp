@@ -1,15 +1,16 @@
-#include <memory>
-#include <iostream>
-#include <stdlib.h>
-#include <string>
-#include <vector>
-
 #include "pieces/pawn.h"
 #include "piece.h"
 #include "board.h"
 #include "tile.h"
 #include "macros.h"
 #include "tools.h"
+
+#include <memory>
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <vector>
+
 using std::cout;
 
 void Board::players_turn() {
@@ -103,13 +104,13 @@ void Board::init_board() {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
             // upper row for pawns
             if (y == pawn_place) {
-                Tile tile(x, y, std::make_unique<Pawn>(new Pawn(BLACK)));
+                Tile tile(x, y, new Pawn(BLACK));
                 board[x][y] = tile;
             }
 
             // lower row for pawns
             else if (y == BOARD_HEIGHT-1 - pawn_place) {
-                Tile tile(x, y, std::make_unique<Pawn>(new Pawn(WHITE)));
+                Tile tile(x, y, new Pawn(WHITE));
                 board[x][y] = tile;
             }
 

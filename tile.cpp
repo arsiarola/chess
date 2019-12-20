@@ -1,15 +1,14 @@
 #include "tile.h"
 #include <iostream>
+#include <memory>
 
 using std::cout;
 
 Tile::Tile(Tile &tile) {
     x = tile.x;
     y = tile.y;
-    auto temp_piece = std::make_unique(new Piece(*(tile.piece)));
-    /* assign_piece(std::make_unique<Piece> temp_piece); */
-
-
+    auto temp_piece = std::make_unique<Piece>(*(tile.piece));
+    assign_piece(temp_piece);
 }
 
 Tile::Tile(int x_, int y_, std::unique_ptr<Piece> piece_) :
@@ -45,12 +44,12 @@ void Tile::remove_piece() {
     piece.release();
 }
 
-void Tile::assign_piece(std::unique_ptr<Piece> piece_) {
+void Tile::assign_piece(std::unique_ptr<Piece> &piece_) {
     piece = std::move(piece_);
 }
 
 // Switch the owners of two pieces
-void Tile::switch_pieces(std::unique_ptr<Piece> piece_) {
+void Tile::switch_pieces(std::unique_ptr<Piece> &piece_) {
     auto temporary = std::move(piece_);
     piece_ = std::move(piece);
     piece = std::move(temporary);

@@ -13,8 +13,8 @@ public:
     int get_y();
     bool has_piece();
     void remove_piece();
-    void assign_piece(std::unique_ptr<Piece> piece_);
-    void switch_pieces(std::unique_ptr<Piece> piece_);
+    void assign_piece(std::unique_ptr<Piece> &piece_);
+    void switch_pieces(std::unique_ptr<Piece> &piece_);
 private:
     int x;
     int y;

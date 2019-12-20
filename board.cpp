@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
-#include <string.h>
 
 #include "pieces/pawn.h"
 #include "piece.h"
@@ -11,7 +10,6 @@
 #include "tile.h"
 #include "macros.h"
 #include "tools.h"
-
 using std::cout;
 
 void Board::players_turn() {

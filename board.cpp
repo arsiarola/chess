@@ -28,11 +28,11 @@ void Board::players_turn() {
         cout << "to: " << to_tile << "\n";
 
         if (board[from_tile]->has_piece()) {
-            refresh_screen("No piece found to be moved\n");
+            refresh_screen("No piece found to be moved\n\n\n");
             continue;
         }
 
-        /* board[from_tile]->move(board[from_tile], board[to_tile], */
+        board[0][from_tile].move(board[0][from_tile], board[0][to_tile], *this);
 
         break;
     }

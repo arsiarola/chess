@@ -2,6 +2,7 @@
 #define TILE_H
 
 #include "piece.h"
+class Board;
 
 class Tile {
 public:
@@ -14,6 +15,7 @@ public:
     void remove_piece();
     void assign_piece(Piece *piece_);
     void switch_pieces(Piece *piece_);
+    void move(Tile &from, Tile &to, Board &board);
 private:
     int x;
     int y;

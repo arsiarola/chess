@@ -1,5 +1,6 @@
 #include <string>
 #include "pawn.h"
+#include "../tile.h"
 
 using namespace std;
 
@@ -8,9 +9,10 @@ Pawn::Pawn(int color_) {
     name = "P";
 }
 
-bool Pawn::move(int from_x, int from_y, int to_x, int to_y, Board &board) {
-    int x_diff = from_x - to_x;
-    int y_diff = from_y - to_y;;
+bool Pawn::move(Tile &from ,Tile &to, Board &board) {
+    int x_diff = from.get_x() - to.get_x();
+    // Negative y_diff to move up and positive for down
+    int y_diff = to.get_y() - from.get_y();
 
 
     // Tried to move sideways
@@ -18,13 +20,17 @@ bool Pawn::move(int from_x, int from_y, int to_x, int to_y, Board &board) {
         return false;
     }
 
-    if (y_diff == UP && color == WHITE) {
-        return true;
+    // White tried to move down
+    if (y_diff > 0 && color == WHITE) {
+        return false;
     }
 
-    else if (y_diff == DOWN && color == BLACK) {
-        return true;
+    // Black tried to move up
+    else if (y_diff < 0 && color == BLACK) {
+        return false;
     }
+
+    to.assign_piece(this);
 
     return false;
 }

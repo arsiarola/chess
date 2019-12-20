@@ -1,3 +1,4 @@
+#include "board.h"
 #include "piece.h"
 #include "tile.h"
 #include <iostream>
@@ -43,6 +44,7 @@ bool Tile::has_piece() {
 
 
 void Tile::assign_piece(Piece *piece_) {
+    remove_piece();
     piece = std::move(piece_);
 }
 
@@ -54,3 +56,15 @@ void Tile::switch_pieces(Piece *piece_) {
 }
 
 
+void Tile::move(Tile &from, Tile &to, Board &board) {
+    if (piece == nullptr) {
+        return;
+    }
+    piece->move(from, to, board);
+}
+
+void Tile::remove_piece() {
+    if (piece != nullptr) {
+        delete []piece;
+    }
+}

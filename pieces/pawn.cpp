@@ -10,7 +10,7 @@ Pawn::Pawn(int color_) {
     name = "P";
 }
 
-    bool Pawn::move(Tile &from ,Tile &destination, Board &board) {
+bool Pawn::move(Tile &from ,Tile &destination, Board &board) {
     cout << "IN move";
     int x_diff = from.get_x() - destination.get_x();
     // Negative y_diff to move up and positive for down
@@ -32,7 +32,7 @@ Pawn::Pawn(int color_) {
         return false;
     }
 
-    destination.assign_piece(this);
+    destination.assign_tile(&from);
 
     return false;
 }

@@ -43,19 +43,18 @@ bool Tile::has_piece() const{
 }
 
 
-void Tile::assign_piece(Piece *piece_) {
-    remove_piece();
-    piece = piece_;
+void Tile::assign_tile(Tile *tile) {
+    free_piece();
+    piece = tile->piece;
 
-    piece_->remove_piece();
-    piece = nullptr;
+    tile->free_piece();
 }
 
 // Switch the owners of two pieces
-void Tile::switch_pieces(Piece *piece_) {
-    auto temporary = std::move(piece_);
-    piece_ = std::move(piece);
-    piece = std::move(temporary);
+void Tile::switch_tiles(Tile *tile) {
+    Piece *temporary = tile->piece;
+    tile->piece = piece;
+    piece = temporary;
 }
 
 
@@ -66,7 +65,7 @@ void Tile::move(Tile &to, Board &board) {
     piece->move(*this, to, board);
 }
 
-void Tile::remove_piece() {
+void Tile::free_piece() {
     if (piece != nullptr) {
         delete []piece;
     }

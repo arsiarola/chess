@@ -12,9 +12,9 @@ public:
     int get_x() const;
     int get_y() const;
     bool has_piece() const;
-    void remove_piece();
-    void assign_piece(Piece *piece_);
-    void switch_pieces(Piece *piece_);
+    void free_piece();
+    void assign_tile(Tile *tile);
+    void switch_tiles(Tile *tile);
     void move(Tile &to, Board &board);
 private:
     int x;

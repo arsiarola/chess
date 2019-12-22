@@ -11,7 +11,7 @@ class Board;
 
 class Pawn : public Piece {
 public:
-    virtual bool move(Tile &from ,Tile &to, Board &board);
+    virtual bool move(Tile &from ,Tile &destination, Board &board);
     Pawn(int color_);
 private:
     using Piece::move;

@@ -19,7 +19,7 @@ Tile& Tile::operator= (const Tile &tile) {
     return *this;
 }
 
-void Tile::print() {
+void Tile::print() const{
     // empty tile
     if (piece == nullptr) {
         cout << " ";
@@ -30,22 +30,25 @@ void Tile::print() {
     }
 }
 
-int Tile::get_x() {
+int Tile::get_x() const{
     return x;
 }
 
-int Tile::get_y() {
+int Tile::get_y() const{
     return y;
 }
 
-bool Tile::has_piece() {
+bool Tile::has_piece() const{
     return piece != nullptr;
 }
 
 
 void Tile::assign_piece(Piece *piece_) {
     remove_piece();
-    piece = std::move(piece_);
+    piece = piece_;
+
+    piece_->remove_piece();
+    piece = nullptr;
 }
 
 // Switch the owners of two pieces
@@ -56,11 +59,11 @@ void Tile::switch_pieces(Piece *piece_) {
 }
 
 
-void Tile::move(Tile &from, Tile &to, Board &board) {
+void Tile::move(Tile &to, Board &board) {
     if (piece == nullptr) {
         return;
     }
-    piece->move(from, to, board);
+    piece->move(*this, to, board);
 }
 
 void Tile::remove_piece() {

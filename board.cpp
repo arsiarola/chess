@@ -19,6 +19,7 @@ void Board::players_turn() {
     int to_tile;
 
     while (true) {
+        refresh_screen();
         ask_for_coordinates(coordinates);
         if (!valid_coordinates(coordinates, from_tile, to_tile)) {
             refresh_screen("Invalid coordinates\n");
@@ -27,14 +28,17 @@ void Board::players_turn() {
         cout << "from: " << from_tile << "\n";
         cout << "to: " << to_tile << "\n";
 
-        if (board[from_tile]->has_piece()) {
+        if (!board[0][from_tile].has_piece()) {
             refresh_screen("No piece found to be moved\n\n\n");
+            cout << "NO piece found";
             continue;
         }
 
-        board[0][from_tile].move(board[0][from_tile], board[0][to_tile], *this);
+        else {
+            board[0][from_tile].move(board[0][to_tile], *this);
+        }
 
-        break;
+        /* break; */
     }
 }
 
@@ -105,18 +109,18 @@ void Board::init_board() {
             // upper row for pawns
             if (y == pawn_place) {
                 Tile tile(x, y, new Pawn(BLACK));
-                board[x][y] = tile;
+                board[y][x] = tile;
             }
 
             // lower row for pawns
             else if (y == BOARD_HEIGHT-1 - pawn_place) {
                 Tile tile(x, y, new Pawn(WHITE));
-                board[x][y] = tile;
+                board[y][x] = tile;
             }
 
             else {
                 Tile tile(x, y, nullptr);
-                board[x][y] = tile;
+                board[y][x] = tile;
             }
         }
     }
@@ -124,13 +128,15 @@ void Board::init_board() {
 
 void Board::print() {
     cout << "  abcdefgh\n\n";
-    for (int y = BOARD_HEIGHT-1; y >= 0; --y) {
-        cout << y+1 << " ";
+    for (int y = 0; y < BOARD_HEIGHT; ++y) {
+        cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
+
         for (int x = 0; x < BOARD_WIDTH; ++x) {
-            board[x][y].print();
+            board[y][x].print();
         }
-        cout << " " << y+1 << "\n";
+        cout << " " << abs(y - BOARD_HEIGHT) << "\n"; // print so that if y is 0 it will print 8
     }
+
     cout << "  abcdefgh\n";
-}
+    }
 

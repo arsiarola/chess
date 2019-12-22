@@ -1,18 +1,20 @@
 #include <string>
 #include "pawn.h"
 #include "../tile.h"
+#include <iostream>
 
-using namespace std;
+using std::cout;
 
 Pawn::Pawn(int color_) {
     color = color_;
     name = "P";
 }
 
-bool Pawn::move(Tile &from ,Tile &to, Board &board) {
-    int x_diff = from.get_x() - to.get_x();
+    bool Pawn::move(Tile &from ,Tile &destination, Board &board) {
+    cout << "IN move";
+    int x_diff = from.get_x() - destination.get_x();
     // Negative y_diff to move up and positive for down
-    int y_diff = to.get_y() - from.get_y();
+    int y_diff = destination.get_y() - from.get_y();
 
 
     // Tried to move sideways
@@ -30,7 +32,7 @@ bool Pawn::move(Tile &from ,Tile &to, Board &board) {
         return false;
     }
 
-    to.assign_piece(this);
+    destination.assign_piece(this);
 
     return false;
 }

@@ -3,7 +3,7 @@ src = $(shell find -type f -name '*.cpp')
 obj = $(src:.cpp=.o)
 
 chess.o: $(obj)
-	g++ -o $@ $^
+	g++ -g -o $@ $^
 
 .PHONY: clean
 clean:

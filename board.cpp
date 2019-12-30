@@ -127,7 +127,7 @@ void Board::init_board() {
 }
 
 void Board::print() {
-    cout << "  abcdefgh\n\n";
+    cout << "  abcdefgh\n";
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
         cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
 

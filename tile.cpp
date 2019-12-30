@@ -46,8 +46,7 @@ bool Tile::has_piece() const{
 void Tile::assign_tile(Tile *tile) {
     free_piece();
     piece = tile->piece;
-
-    tile->free_piece();
+    tile->piece = nullptr;
 }
 
 // Switch the owners of two pieces
@@ -59,14 +58,17 @@ void Tile::switch_tiles(Tile *tile) {
 
 
 void Tile::move(Tile &to, Board &board) {
-    if (piece == nullptr) {
-        return;
+    /* if (piece == nullptr) { */
+    /*     return; */
+    /* } */
+    if (piece != nullptr) {
+        piece->move(*this, to, board);
     }
-    piece->move(*this, to, board);
 }
 
 void Tile::free_piece() {
     if (piece != nullptr) {
-        delete []piece;
+        delete piece;
+        piece = nullptr;
     }
 }

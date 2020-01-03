@@ -13,6 +13,7 @@ public:
     int get_y() const;
     bool has_piece() const;
     void free_piece();
+    
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);
     void move(Tile &to, Board &board);

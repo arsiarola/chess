@@ -10,13 +10,13 @@
 
 /* FOREGROUND */
 #define P_RST  "\033[0m"
-#define P_BLC  "\033[1;30m"
-#define P_WHT  "\033[1;37m"
+#define P_BLC  "\033[1;30;47m"
+#define P_WHT  "\033[1;37;40m"
 
-#endif  /* _COLORS_ */
+#endif  /* COLORS_ */
 
 using namespace std;
-Piece::Piece(std::string name_,  int color_) {
+Piece::Piece(std::string name_,  Color color_) {
     name = name_;
     color = color_;
 }
@@ -26,16 +26,11 @@ Piece::Piece(const Piece &piece) {
     color = piece.color;
 }
 
-string Piece::get_name() {
-    return name;
-}
-
-
 void Piece::print() {
-    if (color == BLACK) {
+    if (color == Color::black) {
         cout << P_BLC << name << P_RST;
     }
-    else {
+    else if (color == Color::white) {
         cout << P_WHT << name << P_RST;
     }
 }

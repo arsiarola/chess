@@ -19,42 +19,42 @@ void Board::players_turn() {
     int to_tile;
 
     while (true) {
-        refresh_screen();
-        ask_for_coordinates(coordinates);
-        if (!valid_coordinates(coordinates, from_tile, to_tile)) {
-            refresh_screen("Invalid coordinates\n");
-            continue;
-        }
-        cout << "from: " << from_tile << "\n";
-        cout << "to: " << to_tile << "\n";
+	refresh_screen();
+	ask_for_coordinates(coordinates);
+	if (!valid_coordinates(coordinates, from_tile, to_tile)) {
+	    refresh_screen("Invalid coordinates\n");
+	    continue;
+	}
+	cout << "from: " << from_tile << "\n";
+	cout << "to: " << to_tile << "\n";
 
-        if (!board[0][from_tile].has_piece()) {
-            refresh_screen("No piece found to be moved\n\n\n");
-            cout << "NO piece found";
-            continue;
-        }
+	if (!board[0][from_tile].has_piece()) {
+	    refresh_screen("No piece found to be moved\n\n\n");
+	    cout << "NO piece found";
+	    continue;
+	}
 
-        else {
-            board[0][from_tile].move(board[0][to_tile], *this);
-        }
+	else {
+	    board[0][from_tile].move(board[0][to_tile], *this);
+	}
 
-        /* break; */
+	/* break; */
     }
 }
 
 void Board::refresh_screen(std::string message) {
-            system("clear");
-            print();
-            cout << message;
+    system("clear");
+    print();
+    cout << message;
 }
 
 bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
     if (coordinates.length() < 5) {
-        cout << "Input string was too short\n";
-        return false;
+	cout << "Input string was too short\n";
+	return false;
     }
 
-// having - '0' will convert from char to int
+    // having - '0' will convert from char to int
     // for x axel we need -16 since it's an uppercase letter and we want e.g. A to represent 1
     int from_x = coordinates[0] - 16 - '0';
     int to_x = coordinates[3]   - 16 - '0';
@@ -63,11 +63,11 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
     int to_y = coordinates[4]   - '0';
 
     if (!valid_x(from_x) || !valid_x(to_x)) {
-        return false;
+	return false;
     }
 
     if (!valid_y(from_y) || !valid_y(to_y)) {
-        return false;
+	return false;
     }
 
     from_num = coordinate_to_tile_num(from_x, from_y);
@@ -105,38 +105,37 @@ void Board::init_board() {
 
     // initalize empty spots and pawns
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
-        for (int x = 0; x < BOARD_WIDTH; ++x) {
-            // upper row for pawns
-            if (y == pawn_place) {
-                Tile tile(x, y, new Pawn(BLACK));
-                board[y][x] = tile;
-            }
+	for (int x = 0; x < BOARD_WIDTH; ++x) {
+	    // upper row for pawns
+	    if (y == pawn_place) {
+		Tile tile(x, y, new Pawn(Color::black));
+		board[y][x] = tile;
+	    }
 
-            // lower row for pawns
-            else if (y == BOARD_HEIGHT-1 - pawn_place) {
-                Tile tile(x, y, new Pawn(WHITE));
-                board[y][x] = tile;
-            }
+	    // lower row for pawns
+	    else if (y == BOARD_HEIGHT-1 - pawn_place) {
+		Tile tile(x, y, new Pawn(Color::white));
+		board[y][x] = tile;
+	    }
 
-            else {
-                Tile tile(x, y, nullptr);
-                board[y][x] = tile;
-            }
-        }
+	    else {
+		Tile tile(x, y, nullptr);
+		board[y][x] = tile;
+	    }
+	}
     }
 }
 
 void Board::print() {
     cout << "  abcdefgh\n";
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
-        cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
+	cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
 
-        for (int x = 0; x < BOARD_WIDTH; ++x) {
-            board[y][x].print();
-        }
-        cout << " " << abs(y - BOARD_HEIGHT) << "\n"; // print so that if y is 0 it will print 8
+	for (int x = 0; x < BOARD_WIDTH; ++x) {
+	    board[y][x].print();
+	}
+	cout << " " << abs(y - BOARD_HEIGHT) << "\n"; // print so that if y is 0 it will print 8
     }
 
     cout << "  abcdefgh\n";
-    }
-
+}

@@ -26,13 +26,14 @@ public:
   
     Color get_turn() { return turn; };
 private:
-    void refresh_screen(std::string message = "");
-    int coordinate_to_tile_num(int x, int y);
-    bool valid_coordinates(std::string coordinates, int &from_num, int &to_num);
-    void ask_for_coordinates(std::string &coordinates);
-    bool valid_y(int y);
-    bool valid_x(int x);
     Color turn = black;
+    bool valid_coordinates(std::string coordinates, int &from_num, int &to_num);
+    bool valid_x(int x);
+    bool valid_y(int y);
+    int coordinate_to_tile_num(int x, int y);
+    void ask_for_coordinates(std::string &coordinates);
+    void refresh_screen(std::string message = "");
+    void switch_turns();
 
     Tile board[BOARD_WIDTH][BOARD_HEIGHT];
 };

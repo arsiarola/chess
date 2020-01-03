@@ -1,6 +1,8 @@
 #include "board.h"
 
 int main() {
-    Board board;
-    board.players_turn();
+    while (true) {
+	Board board;
+	board.players_turn();
+    }
 }

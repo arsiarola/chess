@@ -1,6 +1,8 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include "tools.h"
+
 class Board;
 class Piece;
 
@@ -13,10 +15,11 @@ public:
     int get_y() const;
     bool has_piece() const;
     void free_piece();
+    Color get_piece_color();
     
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);
-    void move(Tile &to, Board &board);
+    bool move(Tile &to, Board &board);
 private:
     int x;
     int y;

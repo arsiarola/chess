@@ -19,6 +19,10 @@ Tile& Tile::operator= (const Tile &tile) {
     return *this;
 }
 
+Color Tile::get_piece_color() {
+    return piece->get_color();
+}
+
 void Tile::print() const{
     // empty tile
     if (piece == nullptr) {
@@ -57,13 +61,11 @@ void Tile::switch_tiles(Tile *tile) {
 }
 
 
-void Tile::move(Tile &to, Board &board) {
-    /* if (piece == nullptr) { */
-    /*     return; */
-    /* } */
-    if (piece != nullptr) {
-        piece->move(*this, to, board);
+bool Tile::move(Tile &to, Board &board) {
+    if (piece == nullptr) {
+	return false;
     }
+    return piece->move(*this, to, board);
 }
 
 void Tile::free_piece() {

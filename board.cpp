@@ -34,11 +34,21 @@ void Board::players_turn() {
 	    continue;
 	}
 
-	else {
-	    board[0][from_tile].move(board[0][to_tile], *this);
+	else if (!board[0][from_tile].move(board[0][to_tile], *this)) {
+	    continue;
 	}
+	
+	switch_turns();
+	break;
+    }
+}
 
-	/* break; */
+void Board::switch_turns() {
+    if (turn == Color::black) {
+	turn = Color::white;
+    }
+    else {
+	turn = Color::black;
     }
 }
 
@@ -91,12 +101,12 @@ void Board::ask_for_coordinates(std::string &coordinates) {
 }
 
 bool Board::valid_x(int x) {
-    cout << "this is x: " << x << "\n";
+    // cout << "this is x: " << x << "\n";
     return (x <= MAX_WIDTH &&  x >= MIN_WIDTH );
 }
 
 bool Board::valid_y(int y) {
-    cout << "this is y: " << y << "\n";
+    // cout << "this is y: " << y << "\n";
     return (y <= MAX_HEIGHT &&  y >= MIN_HEIGHT );
 }
 

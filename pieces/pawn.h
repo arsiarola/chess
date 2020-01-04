@@ -14,8 +14,10 @@ public:
     virtual bool move(Tile &from ,Tile &destination, Board &board);
     Pawn(Color color_);
 private:
+    bool move_black(Tile &from, Tile &destination);
+    bool move_white(Tile &from, Tile &destination);
     using Piece::move;
-
+    bool first_move = true;
 };
 
 

@@ -29,8 +29,7 @@ void Board::players_turn() {
 	cout << "to: " << to_tile << "\n";
 
 	if (!board[0][from_tile].has_piece()) {
-	    refresh_screen("No piece found to be moved\n\n\n");
-	    cout << "NO piece found";
+	    refresh_screen("No piece found to be moved\n");
 	    continue;
 	}
 

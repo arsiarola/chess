@@ -17,12 +17,14 @@ public:
     void free_piece();
     Color get_piece_color();
     
+    
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);
     bool move(Tile &to, Board &board);
 private:
     int x;
     int y;
+    int tile_num;
     Piece *piece;
 };
 #endif

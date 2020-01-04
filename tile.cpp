@@ -9,7 +9,8 @@ using std::cout;
 Tile::Tile(int x_, int y_, Piece * piece_) :
     x(x_),
     y(y_),
-    piece(piece_)
+    tile_num(x + (y * pie
+    Piece(piece_)
 {}
 
 Tile& Tile::operator= (const Tile &tile) {

@@ -16,7 +16,7 @@ public:
     bool has_piece() const;
     void free_piece();
     Color get_piece_color();
-    
+    int get_tile_num() { return tile_num; }
     
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);

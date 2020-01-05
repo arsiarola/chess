@@ -11,11 +11,13 @@ class Board;
 
 class Pawn : public Piece {
 public:
-    virtual bool move(Tile &from ,Tile &destination, Board &board);
+    virtual void move(Tile &from ,Tile &destination, Board &board);
     Pawn(Color color_);
 private:
-    bool move_black(Tile &from, Tile &destination);
-    bool move_white(Tile &from, Tile &destination);
+    bool can_move_black(Tile &from, Tile &destination, Board &board);
+    bool can_move_white(Tile &from, Tile &destination, Board &board);
+    bool is_piece_in_front (Tile &from, Tile &destination, Board &board);
+    bool is_correct_direction(Tile &from, Tile &destination);
     using Piece::move;
     bool first_move = true;
 };

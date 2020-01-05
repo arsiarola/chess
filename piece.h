@@ -13,7 +13,7 @@ class Piece {
 public:
     Piece(std::string = "", Color color = black);
     Piece(const Piece &piece);
-    virtual bool move(Tile &from ,Tile &to, Board &board) = 0;
+    virtual void move(Tile &from ,Tile &to, Board &board);
     
     std::string get_name() { return name; };
     Color get_color () { return color; };

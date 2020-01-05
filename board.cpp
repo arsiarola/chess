@@ -18,8 +18,8 @@ void Board::players_turn() {
     int from_tile;
     int to_tile;
 
+    print();
     while (true) {
-	refresh_screen();
 	ask_for_coordinates(coordinates);
 	if (!valid_coordinates(coordinates, from_tile, to_tile)) {
 	    refresh_screen("Invalid coordinates\n");
@@ -33,7 +33,11 @@ void Board::players_turn() {
 	    continue;
 	}
 
-	else if (!board[0][from_tile].move(board[0][to_tile], *this)) {
+	try {
+	    board[0][from_tile].move(board[0][to_tile], *this);
+	}
+	catch (const char *message) {
+	    refresh_screen(message);
 	    continue;
 	}
 	
@@ -51,10 +55,14 @@ void Board::switch_turns() {
     }
 }
 
+bool Board::has_piece(int tile_num) {
+    return board[0][tile_num].has_piece();
+}
+
 void Board::refresh_screen(std::string message) {
     system("clear");
     print();
-    cout << message;
+    cout << message << "\n";
 }
 
 bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
@@ -79,6 +87,7 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
 	return false;
     }
 
+    
     from_num = coordinate_to_tile_num(from_x, from_y);
     to_num = coordinate_to_tile_num(to_x, to_y);
 
@@ -115,22 +124,24 @@ void Board::init_board() {
     // initalize empty spots and pawns
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
 	for (int x = 0; x < BOARD_WIDTH; ++x) {
-	    // upper row for pawns
+	    // upper row for black pawns
+	    cout << "x = " << x;
+            cout << "\ny = " << y << "\n";                
+	    Tile tile;
 	    if (y == pawn_place) {
-		Tile tile(x, y, new Pawn(Color::black));
-		board[y][x] = tile;
+ 		tile = Tile(x, y, new Pawn(Color::black));
 	    }
 
-	    // lower row for pawns
+	    // lower row for white pawns
 	    else if (y == BOARD_HEIGHT-1 - pawn_place) {
-		Tile tile(x, y, new Pawn(Color::white));
-		board[y][x] = tile;
+		tile = Tile(x, y, new Pawn(Color::white));
 	    }
 
 	    else {
-		Tile tile(x, y, nullptr);
-		board[y][x] = tile;
+		tile = Tile(x, y, nullptr);
 	    }
+	    
+	    board[y][x] = tile;
 	}
     }
 }

@@ -6,16 +6,15 @@
 
 using std::cout;
 
-Tile::Tile(int x_, int y_, Piece * piece_) :
-    x(x_),
-    y(y_),
-    tile_num(x + (y * pie
-    Piece(piece_)
-{}
+Tile::Tile(int x_, int y_, Piece *piece_)
+    : x(x_), y(y_), tile_num(x_ + (y_ * (BOARD_HEIGHT))), piece(piece_) {
+    cout << "tile_num = " << tile_num << "\n";
+}
 
 Tile& Tile::operator= (const Tile &tile) {
     x = tile.x;
     y = tile.y;
+    tile_num = tile.tile_num;
     piece = tile.piece;
     return *this;
 }

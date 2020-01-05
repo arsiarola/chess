@@ -8,7 +8,6 @@ using std::cout;
 
 Tile::Tile(int x_, int y_, Piece *piece_)
     : x(x_), y(y_), tile_num(x_ + (y_ * (BOARD_HEIGHT))), piece(piece_) {
-    cout << "tile_num = " << tile_num << "\n";
 }
 
 Tile& Tile::operator= (const Tile &tile) {
@@ -61,11 +60,12 @@ void Tile::switch_tiles(Tile *tile) {
 }
 
 
-bool Tile::move(Tile &to, Board &board) {
+void Tile::move(Tile &to, Board &board) {
     if (piece == nullptr) {
-	return false;
+	throw "No piece found";
+	return;
     }
-    return piece->move(*this, to, board);
+    piece->move(*this, to, board);
 }
 
 void Tile::free_piece() {

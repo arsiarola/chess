@@ -20,7 +20,7 @@ public:
     
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);
-    bool move(Tile &to, Board &board);
+    void move(Tile &to, Board &board);
 private:
     int x;
     int y;

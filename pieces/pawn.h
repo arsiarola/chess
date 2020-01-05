@@ -14,10 +14,12 @@ public:
     virtual void move(Tile &from ,Tile &destination, Board &board);
     Pawn(Color color_);
 private:
-    bool can_move_black(Tile &from, Tile &destination, Board &board);
-    bool can_move_white(Tile &from, Tile &destination, Board &board);
+    bool can_black_eat(Tile &from, Tile &destination, Board &board);
+    bool can_white_eat(Tile &from, Tile &destination, Board &board);
     bool is_piece_in_front (Tile &from, Tile &destination, Board &board);
     bool is_correct_direction(Tile &from, Tile &destination);
+    void move_piece_on_board(Tile &from, Tile &destination);
+
     using Piece::move;
     bool first_move = true;
 };

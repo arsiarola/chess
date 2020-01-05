@@ -95,8 +95,6 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
 }
 
 int Board::coordinate_to_tile_num(int x_, int y_) {
-    cout << "x_ = " << x_ << "\n";
-    cout << "y_ = " << y_ << "\n";
     int x = x_ - MIN_WIDTH;
     int y = abs(y_ - BOARD_HEIGHT);
     return x + (y * BOARD_WIDTH);
@@ -124,10 +122,8 @@ void Board::init_board() {
     // initalize empty spots and pawns
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
 	for (int x = 0; x < BOARD_WIDTH; ++x) {
-	    // upper row for black pawns
-	    cout << "x = " << x;
-            cout << "\ny = " << y << "\n";                
 	    Tile tile;
+	    // upper row for black pawns
 	    if (y == pawn_place) {
  		tile = Tile(x, y, new Pawn(Color::black));
 	    }

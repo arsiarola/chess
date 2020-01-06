@@ -63,8 +63,12 @@ void Tile::switch_tiles(Tile *tile) {
 void Tile::move(Tile &to, Board &board) {
     if (piece == nullptr) {
 	throw "No piece found";
-	return;
     }
+
+    if (tile_num == to.tile_num) {
+	throw "Move has to be a different piece from original tile";
+    }
+    
     piece->move(*this, to, board);
 }
 

@@ -31,6 +31,16 @@ void Board::players_turn() {
 	    continue;
 	}
 
+	if (turn != board[0][from_tile].get_piece_color()) {
+	    refresh_screen("Wrong color piece");
+	    continue;
+	}
+
+	if (from_tile == to_tile) {
+	    refresh_screen("Has to be different tile where to move");
+	    continue;
+	}
+
 	try {
 	    board[0][from_tile].move(board[0][to_tile], *this);
 	}

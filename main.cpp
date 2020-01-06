@@ -5,4 +5,5 @@ int main() {
     while (true) {
 	board.players_turn();
     }
+    return 0;
 }

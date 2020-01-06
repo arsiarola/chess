@@ -34,3 +34,11 @@ void Piece::print() {
         cout << P_WHT << name << P_RST;
     }
 }
+
+int Piece::get_x_diff(Tile &from, Tile &destination) {
+    return destination.get_x() - from.get_x();
+}
+
+int Piece::get_y_diff(Tile &from, Tile &destination) {
+    return destination.get_y() - from.get_y();
+}

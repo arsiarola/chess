@@ -15,22 +15,13 @@ Pawn::Pawn(Color color_) {
 
 
 void Pawn::move(Tile &from ,Tile &destination, Board &board) {
-    int x_diff = from.get_x() - destination.get_x();
-    // Negative y_diff to move up and positive for down
-    int y_diff = destination.get_y() - from.get_y();
+    int x_diff = get_x_diff(from, destination);
+    int y_diff = get_y_diff(from, destination); // - move up and + move down
 
     int from_tile = from.get_tile_num();
     int dest_tile = destination.get_tile_num();
     Color turn = board.get_turn();
 
-    if (turn != color) {
-	throw "Wrong color pawn";
-    } 
-
-    if (dest_tile == from_tile) {
-	throw "Move has to be a different piece from original tile";
-    }
-    
     // will throw if there is error
     is_correct_direction(from, destination);
     
@@ -42,10 +33,10 @@ void Pawn::move(Tile &from ,Tile &destination, Board &board) {
     } 
 
     if (color == Color::white) {
-	can_white_eat(from, destination, board);
+	if (can_white_eat(from, destination, board)) return;
     }
     else if (color == Color::black) {
-	can_black_eat(from, destination, board);
+	if (can_black_eat(from, destination, board)) return;
     }
 
     // We can check first move here since the can_move_ will check correct direction
@@ -94,8 +85,8 @@ bool Pawn::is_piece_in_front (Tile &from, Tile &destination, Board &board) {
 }
 
 bool Pawn::is_correct_direction(Tile &from, Tile &destination) {
-    int x_diff = from.get_x() - destination.get_x();
-    int y_diff = destination.get_y() - from.get_y(); // - move up and + move down
+    int x_diff = get_x_diff(from, destination);
+    int y_diff = get_y_diff(from, destination); // - move up and + move down
 
     if (color == Color::white) {
 	if (y_diff > 0) throw "White pawn cannot move down";
@@ -111,8 +102,8 @@ bool Pawn::is_correct_direction(Tile &from, Tile &destination) {
 }
 
 bool Pawn::can_white_eat(Tile &from, Tile &destination, Board &board) {
-    int x_diff = from.get_x() - destination.get_x();
-    int y_diff = destination.get_y() - from.get_y(); // - move up and + move down
+    int x_diff = get_x_diff(from, destination);
+    int y_diff = get_y_diff(from, destination); // - move up and + move down
     int dest_tile = destination.get_tile_num();
     
     // In no case can white move down
@@ -134,8 +125,8 @@ bool Pawn::can_white_eat(Tile &from, Tile &destination, Board &board) {
 }
 
 bool Pawn:: can_black_eat(Tile &from, Tile &destination, Board &board) {
-    int x_diff = from.get_x() - destination.get_x();
-    int y_diff = destination.get_y() - from.get_y(); // - move up and + move down
+    int x_diff = get_x_diff(from, destination);
+    int y_diff = get_y_diff(from, destination); // - move up and + move down
     int dest_tile = destination.get_tile_num();
     
     // In no case can black move up

@@ -22,7 +22,7 @@ public:
     void init_board();
     void print();
     std::string ask_for_move();
-    bool has_piece(int tile_num);
+    bool  has_piece(int tile_num);
     void players_turn();
   
     Color get_turn() { return turn; };

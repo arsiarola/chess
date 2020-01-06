@@ -60,11 +60,11 @@ void Pawn::move(Tile &from ,Tile &destination, Board &board) {
     
     // Since eating check has been done now we can't move sideways
     if (abs(x_diff) > 0) {
-	throw "Pawn cannot move sideways\n";
+	throw "Pawn cannot move sideways";
     }
     
     if (is_piece_in_front(from, destination, board)) {
-	throw "There is piece infront of pawn, cannot move there\n";
+	throw "There is piece infront of pawn, cannot move there";
     }
 
     move_piece_on_board(from, destination);

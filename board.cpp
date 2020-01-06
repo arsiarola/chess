@@ -18,18 +18,16 @@ void Board::players_turn() {
     int from_tile;
     int to_tile;
 
-    print();
+    refresh_screen();
     while (true) {
 	ask_for_coordinates(coordinates);
 	if (!valid_coordinates(coordinates, from_tile, to_tile)) {
-	    refresh_screen("Invalid coordinates\n");
+	    refresh_screen("Invalid coordinates");
 	    continue;
 	}
-	cout << "from: " << from_tile << "\n";
-	cout << "to: " << to_tile << "\n";
 
 	if (!board[0][from_tile].has_piece()) {
-	    refresh_screen("No piece found to be moved\n");
+	    refresh_screen("No piece found to be moved");
 	    continue;
 	}
 

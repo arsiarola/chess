@@ -28,41 +28,11 @@ void Queen::move(Tile &from, Tile &destination, Board &board) {
         }
     }
 
-    while (true) {
-        if (x_diff > 0) { // right
-            pos_tile += 1;
-            x_diff -= 1;
-        }
-
-        else if (x_diff < 0) { //left
-            pos_tile -= 1;
-            x_diff += 1;
-        }
-                
-        if (y_diff > 0) { // up
-            pos_tile += BOARD_WIDTH;
-            y_diff -= 1;
-        }
-
-        else if (y_diff < 0) { // down
-            pos_tile -= BOARD_WIDTH;
-            y_diff += 1;
-        }
-            
-        // TODO: this is bad checking should do it with calculating new values
-        if (pos_tile > MAX_TILE_NUM)
-            break;
-        if (pos_tile < MIN_TILE_NUM)
-            break;
-        if (board.has_piece(pos_tile))
-            break;
-        if (pos_tile == dest_tile)
-            break;
-    }
+    pos_tile = move_until_dest_or_piece(board, from, destination);
 
     if (board.has_piece(pos_tile) &&
-        board.get_piece_color(pos_tile) == color) {
-        throw "There is same color piece in the path";
+	board.get_piece_color(pos_tile) == color) {
+	throw "There is same color piece in the path";
     }
 
     board.assign_tile_by_tile_nums(from_tile, pos_tile);

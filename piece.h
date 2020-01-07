@@ -21,6 +21,9 @@ public:
     Color get_color () { return color; };
     void print();
 protected:
+    int move_until_dest_or_piece(Board &board, Tile &from, Tile &destination);
+    bool check_if_dest_or_piece(Board &board, int pos_tile, int dest_tile);
+
     int get_x_diff(Tile &from, Tile &destination);
     int get_y_diff(Tile &from, Tile &destination);
     std::string name;

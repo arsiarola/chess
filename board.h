@@ -22,12 +22,15 @@
 #define BLACK_KNIGHT(num) ((num) == 1 || (num) == 6 ? true : false)
 #define BLACK_BISHOP(num) ((num) == 2 || (num) == 5 ? true : false)
 #define BLACK_QUEEN(num)  ((num) == 3 ? true : false)
+#define BLACK_KING(num)   ((num) == 4 ? true : false)
 #define BLACK_PAWN(num)   ((num) >= 8 && (num) <= 15 ? true : false)
 
 #define WHITE_ROOK(num)   ((num) == 56 || (num) == 63 ? true : false)
 #define WHITE_KNIGHT(num) ((num) == 57 || (num) == 62 ? true : false)
 #define WHITE_BISHOP(num) ((num) == 58 || (num) == 61 ? true : false)
 #define WHITE_QUEEN(num)  ((num) == 59 ? true : false)
+#define WHITE_KING(num)   ((num) == 60 ? true : false)
+
 #define WHITE_PAWN(num)   ((num) >= 48 && (num) <= 55 ? true : false)
 
 void print_separator();

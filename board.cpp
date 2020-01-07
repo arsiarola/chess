@@ -4,6 +4,7 @@
 #include "pieces/knight.h"
 #include "pieces/bishop.h"
 #include "pieces/queen.h"
+#include "pieces/king.h"
 
 #include "board.h"
 #include "tile.h"
@@ -190,8 +191,17 @@ Tile Board::init_tile(int x, int y) {
 	return Tile(x, y, new Queen(Color::black));
     }
     
+    
     else if (WHITE_QUEEN(tile_num)) { // white queen
 	return Tile(x, y, new Queen(Color::white));
+    }
+    
+    else if (BLACK_KING(tile_num)) { // black king
+	return Tile(x, y, new King(Color::black));
+    }
+    
+    else if (WHITE_KING(tile_num)) { // white king
+	return Tile(x, y, new King(Color::white));
     }
 
     else if (BLACK_PAWN(tile_num)) { //black pawn

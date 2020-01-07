@@ -198,7 +198,7 @@ Tile Board::init_tile(int x, int y) {
 
 
 void Board::print() {
-    cout << "  abcdefgh\n";
+    print_letter_row();
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
 	print_wall();
 	cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
@@ -212,7 +212,7 @@ void Board::print() {
     print_wall();
 
 
-    cout << "  abcdefgh\n";
+    print_letter_row();
 }
 
 void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
@@ -227,6 +227,13 @@ void Board::print_wall() {
     cout << "\n";
 }
 
-void print_separator() {
-    cout << P_BLUE << " " << P_RST;
+void Board::print_letter_row() {
+    char A = 'A';
+    cout << "  ";
+    for (char i = A; i < A + BOARD_WIDTH; ++i) {
+	cout << "  " << i << " ";
+    }
+    cout << "\n";
 }
+
+void print_separator() { cout << P_BLUE << " " << P_RST; }

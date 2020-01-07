@@ -52,6 +52,7 @@ private:
     void refresh_screen(std::string message = "");
     void switch_turns();
     void print_wall();
+    void print_letter_row();
 
 
     Tile init_tile(int x, int y);

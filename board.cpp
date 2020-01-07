@@ -2,6 +2,7 @@
 #include "pieces/pawn.h"
 #include "pieces/rook.h"
 #include "pieces/knight.h"
+#include "pieces/bishop.h"
 
 #include "board.h"
 #include "tile.h"
@@ -137,12 +138,12 @@ void Board::ask_for_coordinates(std::string &coordinates) {
 
 bool Board::valid_x(int x) {
     // cout << "this is x: " << x << "\n";
-    return (x <= MAX_WIDTH &&  x >= MIN_WIDTH );
+    return (x <= BOARD_WIDTH &&  x >= MIN_WIDTH );
 }
 
 bool Board::valid_y(int y) {
     // cout << "this is y: " << y << "\n";
-    return (y <= MAX_HEIGHT &&  y >= MIN_HEIGHT );
+    return (y <= BOARD_HEIGHT &&  y >= MIN_HEIGHT );
 }
 
 void Board::init_board() {
@@ -174,6 +175,14 @@ Tile Board::init_tile(int x, int y) {
 
     else if (WHITE_KNIGHT(tile_num)) { // white knight
 	return Tile(x, y, new Knight(Color::white));
+    }
+
+    else if (BLACK_BISHOP(tile_num)) { // black bishop
+	return Tile(x, y, new Bishop(Color::black));
+    }
+
+    else if (WHITE_BISHOP(tile_num)) { // white bishop
+	return Tile(x, y, new Bishop(Color::white));
     }
 
     else if (BLACK_PAWN(tile_num)) { //black pawn

@@ -200,13 +200,17 @@ Tile Board::init_tile(int x, int y) {
 void Board::print() {
     cout << "  abcdefgh\n";
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
+	print_wall();
 	cout << abs(y - BOARD_HEIGHT) << " "; // print so that if y is 0 it will print 8
+	print_separator();
 
 	for (int x = 0; x < BOARD_WIDTH; ++x) {
 	    board[y][x].print();
 	}
 	cout << " " << abs(y - BOARD_HEIGHT) << "\n"; // print so that if y is 0 it will print 8
     }
+    print_wall();
+
 
     cout << "  abcdefgh\n";
 }
@@ -215,3 +219,14 @@ void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
     board[0][dest_tile].assign_tile(&board[0][from_tile]);
 }
 
+void Board::print_wall() {
+    cout << "  "; // this separation between board and block number
+    for (int i = 0; i < ((BOARD_WIDTH-1) * BLOCK_WIDTH - 2); ++i) {
+	print_separator();
+    }
+    cout << "\n";
+}
+
+void print_separator() {
+    cout << P_BLUE << " " << P_RST;
+}

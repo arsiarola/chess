@@ -1,6 +1,7 @@
 #include "board.h"
 #include "piece.h"
 #include "tile.h"
+#include "tools.h"
 #include <iostream>
 #include <memory>
 
@@ -25,13 +26,23 @@ Color Tile::get_piece_color() {
 void Tile::print() const{
     // empty tile
     if (piece == nullptr) {
-        cout << " ";
+        cout << "   ";
     }
 
-    else {
-        piece->print();
+    else if (piece->get_color() == Color::black) {
+	cout << P_BLC << " ";
+	piece->print();
+	cout << P_BLC << " ";
     }
+	
+    else if (piece->get_color() == Color::white) {
+	cout << P_WHT << " ";
+	piece->print();
+	cout << P_WHT << " ";
+    }
+    print_separator();
 }
+
 
 int Tile::get_x() const{
     return x;

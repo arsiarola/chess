@@ -4,16 +4,7 @@
 #include "piece.h"
 #include "board.h"
 #include "macros.h"
-
-#ifndef COLORS_
-#define COLORS_
-
-/* FOREGROUND */
-#define P_RST  "\033[0m"
-#define P_BLC  "\033[1;30;47m"
-#define P_WHT  "\033[1;37;40m"
-
-#endif  /* COLORS_ */
+#include "tools.h"
 
 using namespace std;
 Piece::Piece(std::string name_,  Color color_) {

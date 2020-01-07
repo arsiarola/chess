@@ -1,5 +1,8 @@
-#include "pieces/pawn.h"
 #include "piece.h"
+#include "pieces/pawn.h"
+#include "pieces/rook.h"
+#include "pieces/knight.h"
+
 #include "board.h"
 #include "tile.h"
 #include "macros.h"
@@ -26,7 +29,8 @@ void Board::players_turn() {
 	    continue;
 	}
 
-	if (!board[0][from_tile].has_piece()) {
+	// if (!board[0][from_tile].has_piece()) {
+	if (!has_piece(from_tile)) {
 	    refresh_screen("No piece found to be moved");
 	    continue;
 	}
@@ -64,8 +68,18 @@ void Board::switch_turns() {
 }
 
 bool Board::has_piece(int tile_num) {
+    if (tile_num > MAX_TILE_NUM || tile_num < MIN_TILE_NUM) {
+	//TODO: maybe add here exception 
+	false;
+    }
     return board[0][tile_num].has_piece();
 }
+
+Color Board::get_piece_color(int tile_num) {
+    // TODO: add bound to function 
+    return board[0][tile_num].get_piece_color();
+}
+
 
 void Board::refresh_screen(std::string message) {
     system("clear");
@@ -109,6 +123,13 @@ int Board::coordinate_to_tile_num(int x_, int y_) {
 }
 
 void Board::ask_for_coordinates(std::string &coordinates) {
+    if (turn == Color::black) {
+	cout << "Black's turn (white background, black pieces)\n";
+    }
+    else if (turn == Color::white) {
+	cout << "White's turn (black background, white pieces)\n";
+    }
+    
     cout << "Enter the coordinates: ";
     std::getline(std::cin, coordinates);
     for (auto & c: coordinates) c = toupper(c);
@@ -125,30 +146,47 @@ bool Board::valid_y(int y) {
 }
 
 void Board::init_board() {
-    int pawn_place = 1;
-
-    // initalize empty spots and pawns
+    // initalize the board with correct tile with pieces in them
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
 	for (int x = 0; x < BOARD_WIDTH; ++x) {
-	    Tile tile;
-	    // upper row for black pawns
-	    if (y == pawn_place) {
- 		tile = Tile(x, y, new Pawn(Color::black));
-	    }
-
-	    // lower row for white pawns
-	    else if (y == BOARD_HEIGHT-1 - pawn_place) {
-		tile = Tile(x, y, new Pawn(Color::white));
-	    }
-
-	    else {
-		tile = Tile(x, y, nullptr);
-	    }
-	    
-	    board[y][x] = tile;
+	    board[y][x] = init_tile(x, y);
 	}
     }
 }
+
+int Board::pos_to_num(int x, int y) {
+    return x + (y * BOARD_WIDTH);
+}
+
+Tile Board::init_tile(int x, int y) {
+    int tile_num = pos_to_num(x, y);
+    if (BLACK_ROOK(tile_num)) { // black rook
+	return Tile(x, y, new Rook(Color::black));
+    }
+
+    else if (WHITE_ROOK(tile_num)) { //white rook
+	return Tile(x, y, new Rook(Color::white));
+    }
+
+    else if (BLACK_KNIGHT(tile_num)) { // black knight
+	return Tile(x, y, new Knight(Color::black));
+    }
+
+    else if (WHITE_KNIGHT(tile_num)) { // white knight
+	return Tile(x, y, new Knight(Color::white));
+    }
+
+    else if (BLACK_PAWN(tile_num)) { //black pawn
+	return Tile(x, y, new Pawn(Color::black));
+    }
+    
+    else if (WHITE_PAWN(tile_num)) { //white pawn
+	return Tile(x, y, new Pawn(Color::white));
+    }
+    
+    return Tile(x, y, nullptr);
+}
+
 
 void Board::print() {
     cout << "  abcdefgh\n";
@@ -163,3 +201,8 @@ void Board::print() {
 
     cout << "  abcdefgh\n";
 }
+
+void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
+    board[0][dest_tile].assign_tile(&board[0][from_tile]);
+}
+

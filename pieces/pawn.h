@@ -13,6 +13,7 @@ class Pawn : public Piece {
 public:
     virtual void move(Tile &from ,Tile &destination, Board &board);
     Pawn(Color color_);
+    
 private:
     bool can_black_eat(Tile &from, Tile &destination, Board &board);
     bool can_white_eat(Tile &from, Tile &destination, Board &board);

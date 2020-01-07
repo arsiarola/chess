@@ -66,7 +66,7 @@ bool Pawn::is_piece_in_front (Tile &from, Tile &destination, Board &board) {
     int dest_tile = destination.get_tile_num();
 
     if (dest_tile > from_tile) {
-	while (dest_tile> from_tile) {
+	while (dest_tile > from_tile) {
 	    cout << "dest_tile = " << dest_tile << "\n";
 	    if (board.has_piece(dest_tile)) return true;
 	    dest_tile -= BOARD_WIDTH;

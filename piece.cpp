@@ -35,10 +35,12 @@ void Piece::print() {
     }
 }
 
+// Negative x_diff for left, positive right
 int Piece::get_x_diff(Tile &from, Tile &destination) {
     return destination.get_x() - from.get_x();
 }
 
+// Negative y_diff for up, positive down
 int Piece::get_y_diff(Tile &from, Tile &destination) {
     return destination.get_y() - from.get_y();
 }

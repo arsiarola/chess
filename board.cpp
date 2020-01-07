@@ -3,6 +3,7 @@
 #include "pieces/rook.h"
 #include "pieces/knight.h"
 #include "pieces/bishop.h"
+#include "pieces/queen.h"
 
 #include "board.h"
 #include "tile.h"
@@ -183,6 +184,14 @@ Tile Board::init_tile(int x, int y) {
 
     else if (WHITE_BISHOP(tile_num)) { // white bishop
 	return Tile(x, y, new Bishop(Color::white));
+    }
+    
+    else if (BLACK_QUEEN(tile_num)) { // black queen
+	return Tile(x, y, new Queen(Color::black));
+    }
+    
+    else if (WHITE_QUEEN(tile_num)) { // white queen
+	return Tile(x, y, new Queen(Color::white));
     }
 
     else if (BLACK_PAWN(tile_num)) { //black pawn

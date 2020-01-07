@@ -26,10 +26,8 @@ void Rook::move(Tile &from, Tile &destination, Board &board) {
     }
 
     // make sure the movement is either vertical or horizontal
-    if ((x_diff == 0 && y_diff != 0) || (x_diff != 0 && y_diff ==0)) {
+    if ((x_diff == 0 && y_diff != 0) || (x_diff != 0 && y_diff == 0)) {
 	while (true) {
-	    cout << "dest_tile = " << dest_tile;
-            cout << "\pos_tile = " << pos_tile << "\n";
             if (x_diff > 0) { // right
               pos_tile += 1;
               x_diff -= 1;
@@ -49,6 +47,7 @@ void Rook::move(Tile &from, Tile &destination, Board &board) {
               pos_tile -= BOARD_WIDTH;
               y_diff += 1;
 	    }
+	    
 	    // TODO: this is bad checking should do it with calculating new values
             if (pos_tile > MAX_TILE_NUM)
               break;

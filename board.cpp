@@ -55,7 +55,7 @@ void Board::players_turn() {
 	    refresh_screen(message);
 	    continue;
 	}
-	
+ 
 	switch_turns();
 	break;
     }
@@ -161,6 +161,21 @@ int Board::pos_to_num(int x, int y) {
     return x + (y * BOARD_WIDTH);
 }
 
+bool Board::is_game_over() {
+    if (winner == Color::none) {
+        return false;
+    }
+    return true;
+}
+
+std::string Board::get_winner_string() {
+    if (winner == Color::white) return "white";
+    if (winner == Color::black) return "black";
+    return ""; 
+}
+
+
+
 Tile Board::init_tile(int x, int y) {
     int tile_num = pos_to_num(x, y);
     if (BLACK_ROOK(tile_num)) { // black rook
@@ -235,6 +250,15 @@ void Board::print() {
 }
 
 void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
+    if (!board[0][from_tile].has_piece()) {
+        // TODO: maybe better checking here
+        cout << "No piece found\n";
+        return;
+    }
+    
+    if (board[0][dest_tile].get_piece_name() == KING) {
+        winner = board[0][from_tile].get_piece_color();
+    }
     board[0][dest_tile].assign_tile(&board[0][from_tile]);
 }
 

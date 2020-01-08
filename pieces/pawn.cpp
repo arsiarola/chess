@@ -10,7 +10,7 @@ using std::cout;
 
 Pawn::Pawn(Color color_) {
     color = color_;
-    name = "P";
+    name = PAWN;
 }
 
 

@@ -2,6 +2,8 @@
 #define TILE_H
 
 #include "tools.h"
+#include <string>
+
 
 class Board;
 class Piece;
@@ -17,6 +19,8 @@ public:
     void free_piece();
     Color get_piece_color();
     int get_tile_num() { return tile_num; }
+    std::string get_piece_name();
+
     
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);

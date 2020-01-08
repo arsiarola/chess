@@ -10,7 +10,7 @@ using std::cout;
 
 Queen::Queen(Color color_) {
     color = color_;
-    name = "Q";
+    name = QUEEN;
 }
 
 void Queen::move(Tile &from, Tile &destination, Board &board) {

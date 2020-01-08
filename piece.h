@@ -1,6 +1,14 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+
+#define ROOK "R"
+#define KNIGHT "N"
+#define BISHOP "B"
+#define QUEEN "Q"
+#define KING "K"
+#define PAWN "P"
+
 class Piece;
 class Board;
 class Tile;

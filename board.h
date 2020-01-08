@@ -30,14 +30,13 @@
 #define WHITE_BISHOP(num) ((num) == 58 || (num) == 61 ? true : false)
 #define WHITE_QUEEN(num)  ((num) == 59 ? true : false)
 #define WHITE_KING(num)   ((num) == 60 ? true : false)
-
 #define WHITE_PAWN(num)   ((num) >= 48 && (num) <= 55 ? true : false)
 
 void print_separator();
 
 class Board {
 public:
-    Board() { init_board(); };
+    Board() { init_board(); }
     void init_board();
     void print();
     std::string ask_for_move();
@@ -45,24 +44,26 @@ public:
     Color get_piece_color(int tile_num);
     void players_turn();
     void assign_tile_by_tile_nums(int from_tile, int dest_tile);
+    void refresh_screen(std::string message = "");
 
-  
-    Color get_turn() { return turn; };
+
+    bool is_game_over();
+    Color get_turn() { return turn; }
+    Color get_winner() { return winner; }
+    std::string get_winner_string();
 private:
     bool valid_coordinates(std::string coordinates, int &from_num, int &to_num);
     bool valid_x(int x);
     bool valid_y(int y);
     int coordinate_to_tile_num(int x, int y);
     void ask_for_coordinates(std::string &coordinates);
-    void refresh_screen(std::string message = "");
     void switch_turns();
     void print_wall();
     void print_letter_row();
-
-
     Tile init_tile(int x, int y);
     int pos_to_num(int x, int y);
 
+    Color winner = Color::none;
     Color turn = black;
     Tile board[BOARD_WIDTH][BOARD_HEIGHT];
 };

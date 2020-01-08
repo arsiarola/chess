@@ -10,7 +10,7 @@ using std::cout;
 
 King::King(Color color_) {
     color = color_;
-    name = "K";
+    name = KING;
 }
 
 void King::move(Tile &from, Tile &destination, Board &board) {

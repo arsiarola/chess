@@ -10,7 +10,7 @@ using std::cout;
 
 Knight::Knight(Color color_) {
     color = color_;
-    name = "N";
+    name = KNIGHT;
 }
 
 void Knight::move(Tile &from, Tile &destination, Board &board) {

@@ -10,7 +10,7 @@ using std::cout;
 
 Rook::Rook(Color color_) {
     color = color_;
-    name = "R";
+    name = ROOK;
 }
 
 void Rook::move(Tile &from, Tile &destination, Board &board) {

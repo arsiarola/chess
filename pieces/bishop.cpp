@@ -10,7 +10,7 @@ using std::cout;
 
 Bishop::Bishop(Color color_) {
     color = color_;
-    name = "B";
+    name = BISHOP; 
 }
 
 void Bishop::move(Tile &from, Tile &destination, Board &board) {

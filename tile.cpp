@@ -81,6 +81,7 @@ void Tile::move(Tile &to, Board &board) {
     }
     
     piece->move(*this, to, board);
+    board.refresh_screen();
 }
 
 void Tile::free_piece() {
@@ -88,4 +89,12 @@ void Tile::free_piece() {
         delete piece;
         piece = nullptr;
     }
+}
+
+std::string Tile::get_piece_name() {
+    if (piece == nullptr) {
+        return "";
+    }
+
+    return piece->get_name();
 }

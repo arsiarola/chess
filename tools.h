@@ -16,7 +16,6 @@
 enum Color { black, white, none };
 
 
-
 bool read_string(char *string, int size);
 void fix_string(char *string);
 #endif

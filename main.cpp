@@ -4,8 +4,8 @@
 using std::cout;
 
 int main() {
-    while (true) {
         Board board;
+    while (true) {
         int option = 0;
         cout << "Enter one of the options below\n"
             "1. Start new game\n"

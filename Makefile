@@ -1,4 +1,3 @@
-# src = $(wildcard *.cpp)
 src = $(shell find -type f -name '*.cpp')
 obj = $(src:.cpp=.o)
 

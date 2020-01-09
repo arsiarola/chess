@@ -8,8 +8,7 @@
 
 
 #define PLAY 1
-#define LOAD 2
-#define QUIT 3
+#define QUIT 2
 
 #include <string>
 

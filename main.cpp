@@ -21,9 +21,6 @@ int main() {
                 board.players_turn();
             }
 
-        case LOAD:
-            // TODO
-
         case QUIT:
             return 0;
         }

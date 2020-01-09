@@ -19,6 +19,8 @@
 
 using std::cout;
 
+
+// Everything that has to do when player is inputting coordinates
 void Board::players_turn() {
     std::string coordinates;
     int from_tile;
@@ -27,17 +29,19 @@ void Board::players_turn() {
     refresh_screen();
     while (true) {
 	ask_for_coordinates(coordinates);
+	// Check that the coordinates are within bounds
 	if (!valid_coordinates(coordinates, from_tile, to_tile)) {
 	    refresh_screen("Invalid coordinates");
 	    continue;
 	}
 
-	// if (!board[0][from_tile].has_piece()) {
+	// Check whether the first coordinate that is to be moved has a piece
 	if (!has_piece(from_tile)) {
 	    refresh_screen("No piece found to be moved");
 	    continue;
 	}
 
+	// Check the color of the piece
 	if (turn != board[0][from_tile].get_piece_color()) {
 	    refresh_screen("Wrong color piece");
 	    continue;
@@ -48,6 +52,9 @@ void Board::players_turn() {
 	    continue;
 	}
 
+	// Use polymorphism to call piece's move function. Every type of
+	// piece has it's own implemented move function that will throw an exception
+	// with a message what went wrong
 	try {
 	    board[0][from_tile].move(board[0][to_tile], *this);
 	}
@@ -61,6 +68,7 @@ void Board::players_turn() {
     }
 }
 
+// Switch turns black -> white or white -> black
 void Board::switch_turns() {
     if (turn == Color::black) {
 	turn = Color::white;
@@ -70,6 +78,7 @@ void Board::switch_turns() {
     }
 }
 
+// check whether a given tile in board has a piece, by the tile number
 bool Board::has_piece(int tile_num) {
     if (tile_num > MAX_TILE_NUM || tile_num < MIN_TILE_NUM) {
 	//TODO: maybe add here exception 
@@ -78,18 +87,21 @@ bool Board::has_piece(int tile_num) {
     return board[0][tile_num].has_piece();
 }
 
+// Get color of a piece by tile number
 Color Board::get_piece_color(int tile_num) {
-    // TODO: add bound to function 
+    // TODO: Not sure if here should be done some kind of checking and how to return the error
     return board[0][tile_num].get_piece_color();
 }
 
 
+// Clear screen, print board and out put a message that default to empty string
 void Board::refresh_screen(std::string message) {
     system("clear");
     print();
     cout << message << "\n";
 }
 
+// Check whether user inputted string contains valid coordinates
 bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_num) {
     if (coordinates.length() < 5) {
 	cout << "Input string was too short\n";
@@ -112,13 +124,14 @@ bool Board::valid_coordinates(std::string coordinates, int &from_num, int &to_nu
 	return false;
     }
 
-    
+    // all checking done we can assign the values to the parameters since they are references
     from_num = coordinate_to_tile_num(from_x, from_y);
     to_num = coordinate_to_tile_num(to_x, to_y);
 
     return true;
 }
 
+// X and Y numbers to a tile number
 int Board::coordinate_to_tile_num(int x_, int y_) {
     int x = x_ - MIN_WIDTH;
     int y = abs(y_ - BOARD_HEIGHT);
@@ -133,13 +146,14 @@ void Board::ask_for_coordinates(std::string &coordinates) {
 	cout << "White's turn (black background, white pieces)\n";
     }
     
-    cout << "Enter the coordinates: ";
+    // TODO: add exit optioin
+    cout << "Enter the coordinates separated by space (for example \"a1 b2\"): ";
     std::getline(std::cin, coordinates);
-    for (auto & c: coordinates) c = toupper(c);
+    for (auto & c: coordinates) c = toupper(c); // turn coordinates to uppercase
 }
 
-bool Board::valid_x(int x) {
-    // cout << "this is x: " << x << "\n";
+// check if x value is within bounds
+bool Board::valid_x(int x) { 
     return (x <= BOARD_WIDTH &&  x >= MIN_WIDTH );
 }
 

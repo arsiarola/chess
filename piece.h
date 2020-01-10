@@ -14,7 +14,6 @@ class Board;
 class Tile;
 
 #include <string>
-#include "macros.h"
 #include "tools.h"
 
 class Piece {

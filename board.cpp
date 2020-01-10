@@ -8,7 +8,6 @@
 
 #include "board.h"
 #include "tile.h"
-#include "macros.h"
 #include "tools.h"
 
 #include <memory>
@@ -54,7 +53,7 @@ void Board::players_turn() {
 
 	// Use polymorphism to call piece's move function. Every type of
 	// piece has it's own implemented move function that will throw an exception
-	// with a message what went wrong
+	// with an message if the move was incorrect
 	try {
 	    board[0][from_tile].move(board[0][to_tile], *this);
 	}
@@ -171,10 +170,12 @@ void Board::init_board() {
     }
 }
 
+// return tile number from x and y
 int Board::pos_to_num(int x, int y) {
     return x + (y * BOARD_WIDTH);
 }
 
+// return whether game is over
 bool Board::is_game_over() {
     if (winner == Color::none) {
         return false;
@@ -182,14 +183,16 @@ bool Board::is_game_over() {
     return true;
 }
 
+// return winner in string format
 std::string Board::get_winner_string() {
     if (winner == Color::white) return "white";
     if (winner == Color::black) return "black";
     return ""; 
 }
 
-
-
+// return correct tile based on coordinates
+// for every type of piece there is a macro that takes tile number and
+// returns whether that tile is correct
 Tile Board::init_tile(int x, int y) {
     int tile_num = pos_to_num(x, y);
     if (BLACK_ROOK(tile_num)) { // black rook
@@ -241,10 +244,12 @@ Tile Board::init_tile(int x, int y) {
 	return Tile(x, y, new Pawn(Color::white));
     }
     
+    // every type of piece has been checked so create an empty tile that meaning
+    // piece pointer is nullptr
     return Tile(x, y, nullptr);
 }
 
-
+// Print the board
 void Board::print() {
     print_letter_row();
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
@@ -263,6 +268,7 @@ void Board::print() {
     print_letter_row();
 }
 
+// move piece by its tile number to some other tile
 void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
     if (!board[0][from_tile].has_piece()) {
         // TODO: maybe better checking here
@@ -276,6 +282,7 @@ void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
     board[0][dest_tile].assign_tile(&board[0][from_tile]);
 }
 
+// print horisontal wall that is the width of the board by separators
 void Board::print_wall() {
     cout << "  "; // this separation between board and block number
     for (int i = 0; i < ((BOARD_WIDTH-1) * BLOCK_WIDTH - 2); ++i) {
@@ -284,6 +291,8 @@ void Board::print_wall() {
     cout << "\n";
 }
 
+// print a row of the horisintal coordinates matching the width of the
+// board and the correspondig tiles
 void Board::print_letter_row() {
     char A = 'A';
     cout << "  ";
@@ -293,4 +302,6 @@ void Board::print_letter_row() {
     cout << "\n";
 }
 
+// Print one separator that is the structure of the board
+// with these the board grid will be made 
 void print_separator() { cout << P_BLUE << " " << P_RST; }

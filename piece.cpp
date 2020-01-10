@@ -84,5 +84,4 @@ bool Piece::check_if_dest_or_piece(Board &board, int pos_tile, int dest_tile) {
     if (board.has_piece(pos_tile)) return true;
     if (pos_tile == dest_tile)     return true;
     return false;
-
 }

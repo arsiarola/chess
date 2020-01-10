@@ -13,7 +13,6 @@ Pawn::Pawn(Color color_) {
     name = PAWN;
 }
 
-
 void Pawn::move(Tile &from ,Tile &destination, Board &board) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
@@ -25,26 +24,32 @@ void Pawn::move(Tile &from ,Tile &destination, Board &board) {
     // will throw if there is error
     is_correct_direction(from, destination);
     
-    // TODO (Maybe, not sure if it belongs here)
-    // ceate bound checking function in board class and call it here for  from and destination
-
     if (abs(x_diff) > 1) { // Tried to move sideways too much 
 	throw "Pawn cannot move sideways";
     } 
 
+    // check for eating meaning one sideways and one up or down depending on the color
     if (color == Color::white) {
-	if (can_white_eat(from, destination, board)) return;
+	if (can_white_eat(from, destination, board)) {
+	    move_pawn_on_board(from, destination);
+	    return;
+	}
     }
     else if (color == Color::black) {
-	if (can_black_eat(from, destination, board)) return;
+	if (can_black_eat(from, destination, board)) {
+	    move_pawn_on_board(from, destination);
+	    return;
+	}
+
     }
 
-    // We can check first move here since the can_move_ will check correct direction
+    // Check if it's first move and the is moved by two
     if (first_move && abs(y_diff) == 2 && abs(x_diff) == 0 && !(is_piece_in_front(from, destination, board))) {
-    move_piece_on_board(from, destination);
+	move_pawn_on_board(from, destination);
 	return;
     }
     
+    // Since first move has been checked pawn can only move by one vertically
     if (abs(y_diff) > 1) {
 	throw "Pawn can only move one step";
     }
@@ -58,32 +63,36 @@ void Pawn::move(Tile &from ,Tile &destination, Board &board) {
 	throw "There is piece infront of pawn, cannot move there";
     }
 
-    move_piece_on_board(from, destination);
+    move_pawn_on_board(from, destination);
 }
 
+
 bool Pawn::is_piece_in_front (Tile &from, Tile &destination, Board &board) {
-    int from_tile = from.get_tile_num();
-    int dest_tile = destination.get_tile_num();
+    // int from_tile = from.get_tile_num();
+    // int dest_tile = destination.get_tile_num();
+    // if (dest_tile > from_tile) {
+    // 	while (dest_tile > from_tile) {
+    // 	    cout << "dest_tile = " << dest_tile << "\n";
+    // 	    if (board.has_piece(dest_tile)) return true;
+    // 	    dest_tile -= BOARD_WIDTH;
+    // 	}
+    // }
 
-    if (dest_tile > from_tile) {
-	while (dest_tile > from_tile) {
-	    cout << "dest_tile = " << dest_tile << "\n";
-	    if (board.has_piece(dest_tile)) return true;
-	    dest_tile -= BOARD_WIDTH;
-	}
-    }
+    // else if (dest_tile < from_tile) {
+    // 	while (dest_tile < from_tile) {
+    // 	    cout << "dest_tile = " << dest_tile << "\n";
+    // 	    if (board.has_piece(dest_tile)) return true;
+    // 	    dest_tile += BOARD_WIDTH;
+    // 	}
+    // }
 
-    else if (dest_tile < from_tile) {
-	while (dest_tile < from_tile) {
-	    cout << "dest_tile = " << dest_tile << "\n";
-	    if (board.has_piece(dest_tile)) return true;
-	    dest_tile += BOARD_WIDTH;
-	}
-    }
 
+    int pos_tile = move_until_dest_or_piece(board, from, destination);
+    if (board.has_piece(pos_tile)) return true; 
     return false;
 }
 
+// check that the direction is correct according to the color
 bool Pawn::is_correct_direction(Tile &from, Tile &destination) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
@@ -101,6 +110,7 @@ bool Pawn::is_correct_direction(Tile &from, Tile &destination) {
     return true;
 }
 
+// Test for eating since it involves horizontal movement
 bool Pawn::can_white_eat(Tile &from, Tile &destination, Board &board) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
@@ -116,7 +126,6 @@ bool Pawn::can_white_eat(Tile &from, Tile &destination, Board &board) {
     if (y_diff == -1 && abs(x_diff) == 1 && destination.has_piece()) {
 	// different color piece that it tries to eat
 	if (destination.get_piece_color() != color) {
-	    move_piece_on_board(from, destination);
 	    return true;
 	}
     }
@@ -138,7 +147,7 @@ bool Pawn:: can_black_eat(Tile &from, Tile &destination, Board &board) {
     if (y_diff == 1 && abs(x_diff) == 1 && destination.has_piece()) {
 	// different color piece that it tries to eat
 	if (destination.get_piece_color() != color) {
-	    move_piece_on_board(from, destination);
+	    move_pawn_on_board(from, destination);
 	    return true;
 	}
     }
@@ -146,7 +155,7 @@ bool Pawn:: can_black_eat(Tile &from, Tile &destination, Board &board) {
     return false;
 }
 
-void Pawn::move_piece_on_board(Tile &from, Tile &destination) {
+void Pawn::move_pawn_on_board(Tile &from, Tile &destination) {
     destination.assign_tile(&from);
     first_move = false;
 }

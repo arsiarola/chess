@@ -18,10 +18,11 @@ void Bishop::move(Tile &from, Tile &destination, Board &board) {
     int y_diff = get_y_diff(from, destination); // - move up and + move down
     
     int pos_tile = from.get_tile_num();
-        int from_tile = from.get_tile_num();
+    int from_tile = from.get_tile_num();
 
     int dest_tile = destination.get_tile_num();
 
+    // The absolute difference between x and y must be the same for bishop
     if (abs(x_diff) != abs(y_diff)) {
 	throw "Bishop can only move diagonally";
     }

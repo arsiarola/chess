@@ -3,10 +3,9 @@
 
 #include "piece.h"
 #include "board.h"
-#include "macros.h"
 #include "tools.h"
 
-using namespace std;
+
 Piece::Piece(std::string name_,  Color color_) {
     name = name_;
     color = color_;
@@ -17,25 +16,30 @@ Piece::Piece(const Piece &piece) {
     color = piece.color;
 }
 
+// print a piece according to it's color with color print codes from tools.h
+// black pieces have white background and black foreground, otherway for whites
 void Piece::print() {
     if (color == Color::black) {
-        cout << P_BLC << name << P_RST;
+        std::cout << P_BLC << name << P_RST;
     }
     else if (color == Color::white) {
-        cout << P_WHT << name << P_RST;
+        std::cout << P_WHT << name << P_RST;
     }
 }
 
-// Negative x_diff for left, positive right
+
+// Two functions for calculating  difference in x and y axis between two tiles
+// - X_diff for left, + right
 int Piece::get_x_diff(Tile &from, Tile &destination) {
     return destination.get_x() - from.get_x();
 }
 
-// Negative y_diff for up, positive down
+// - y_diff for up, + positive down
 int Piece::get_y_diff(Tile &from, Tile &destination) {
     return destination.get_y() - from.get_y();
 }
 
+// move piece untill it hits another piece or is in the destination
 int Piece::move_until_dest_or_piece(Board &board, Tile &from, Tile &destination) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
@@ -63,6 +67,10 @@ int Piece::move_until_dest_or_piece(Board &board, Tile &from, Tile &destination)
 	    y_diff += 1;
 	    pos_tile -= BOARD_WIDTH;
 	}
+
+	// this movement out of bounds shouldn't happen
+	if (pos_tile > MAX_TILE_NUM || pos_tile < MIN_TILE_NUM)
+	    throw "movement out of bounds";
 	
 	if (check_if_dest_or_piece(board, pos_tile, dest_tile)) {
 	    return pos_tile;
@@ -71,15 +79,10 @@ int Piece::move_until_dest_or_piece(Board &board, Tile &from, Tile &destination)
     return 0;
 }
 
+// test if destination or another piece has been reached
 bool Piece::check_if_dest_or_piece(Board &board, int pos_tile, int dest_tile) {
-    if (pos_tile > MAX_TILE_NUM)
-	return true;
-    if (pos_tile < MIN_TILE_NUM)
-	return true;
-    if (board.has_piece(pos_tile))
-	return true;
-    if (pos_tile == dest_tile)
-	return true;
+    if (board.has_piece(pos_tile)) return true;
+    if (pos_tile == dest_tile)     return true;
     return false;
 
 }

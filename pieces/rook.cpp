@@ -21,10 +21,6 @@ void Rook::move(Tile &from, Tile &destination, Board &board) {
     int dest_tile = destination.get_tile_num();
     int from_tile = from.get_tile_num();
 
-    if (x_diff != 0 && y_diff != 0) {
-	throw "Rook can only move horisontally or vertically";
-    }
-
     // make sure the movement is either vertical or horizontal
     if (!((x_diff == 0 && y_diff != 0) || (x_diff != 0 && y_diff == 0))) {
 	throw "incorrect movement with rook";

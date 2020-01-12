@@ -13,6 +13,8 @@ Queen::Queen(Color color_) {
     name = QUEEN;
 }
 
+// The Queen can move in every possible way except in a non linear way,
+// like the knight would move
 void Queen::move(Tile &from, Tile &destination, Board &board) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
@@ -21,10 +23,10 @@ void Queen::move(Tile &from, Tile &destination, Board &board) {
     int from_tile = from.get_tile_num();
     int dest_tile = destination.get_tile_num();
 
-    // Diagonal movement
+    // Diagonal movement, meaning there is movement in x and y axis
     if (x_diff != 0 && y_diff != 0) {
         if (abs(x_diff) != abs(y_diff)) {
-            throw "Queen can move horizontally, vertically or diagonally";
+            throw "Queen can move horizontally, vertically or diagonally linearilly";
         }
     }
 

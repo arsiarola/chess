@@ -147,7 +147,6 @@ bool Pawn:: can_black_eat(Tile &from, Tile &destination, Board &board) {
     if (y_diff == 1 && abs(x_diff) == 1 && destination.has_piece()) {
 	// different color piece that it tries to eat
 	if (destination.get_piece_color() != color) {
-	    move_pawn_on_board(from, destination);
 	    return true;
 	}
     }

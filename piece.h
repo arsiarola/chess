@@ -1,7 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-
 #define ROOK "R"
 #define KNIGHT "N"
 #define BISHOP "B"
@@ -22,11 +21,11 @@ public:
     Piece(const Piece &piece);
     // remember to declace all virtual functions like here we have "= 0"
     //other wise will get weird undefined reference to vtable
-    virtual void move(Tile &from ,Tile &to, Board &board) = 0; 
-    
+    virtual void move(Tile &from ,Tile &to, Board &board) = 0;
+
     std::string get_name() { return name; };
     Color get_color () { return color; };
-    void print();
+    void print(int tile_num);
 protected:
     int move_until_dest_or_piece(Board &board, Tile &from, Tile &destination);
     bool check_if_dest_or_piece(Board &board, int pos_tile, int dest_tile);

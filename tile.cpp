@@ -23,38 +23,44 @@ Color Tile::get_piece_color() {
     return piece->get_color();
 }
 
-// print one tile that is 3 characters wide and 1 high 
+// print one tile that is 3 characters wide and 1 high
 void Tile::print() const {
     // empty tile
     if (piece == nullptr) {
-        cout << "   ";
+        for (int i = 0; i < BLOCK_WIDTH; ++i) {
+            print_padding();
+        }
+        return;
+    }
+
+    for (int i = 0; i < BLOCK_WIDTH / 2; ++i) {
+        print_padding();
+    }
+    piece->print(tile_num);
+    for (int i = 0; i < BLOCK_WIDTH / 2; ++i) {
+        print_padding();
     }
 
     // need to check for piece color since the padding will be
-    // different color 
-    else if (piece->get_color() == Color::black) {
-	cout << P_BLC << " " << P_RST;
-	piece->print();
-	cout << P_BLC << " " << P_RST;
-    }
-	
-    else if (piece->get_color() == Color::white) {
-	cout << P_WHT << " ";
-	piece->print();
-	cout << P_WHT << " ";
-    }
-    print_separator();
+    // different color
+    /* print_separator(); */
 }
 
-int Tile::get_x() const{
+void Tile::print_padding() const {
+    change_colors(tile_num_to_bg(tile_num));
+    cout << " ";
+    change_colors(RESET);
+}
+
+int Tile::get_x() const {
     return x;
 }
 
-int Tile::get_y() const{
+int Tile::get_y() const {
     return y;
 }
 
-bool Tile::has_piece() const{
+bool Tile::has_piece() const {
     return piece != nullptr;
 }
 
@@ -76,20 +82,20 @@ void Tile::switch_tiles(Tile *tile) {
 // if it's different tile where we are trying to move
 void Tile::move(Tile &to, Board &board) {
     if (piece == nullptr) {
-	throw "No piece found";
+        throw "No piece found";
     }
 
     if (tile_num == to.tile_num) {
-	throw "Move has to be a different piece from original tile";
+        throw "Move has to be a different piece from original tile";
     }
-    
+
     piece->move(*this, to, board);
     // if pieces move doesn't throw an error we have to refresh the screen
     // since the piece was moved
     board.refresh_screen();
 }
 
-// free pieces data 
+// free pieces data
 void Tile::free_piece() {
     if (piece != nullptr) {
         delete piece;
@@ -104,4 +110,16 @@ std::string Tile::get_piece_name() {
     }
 
     return piece->get_name();
+}
+
+const char* tile_num_to_bg(int tile_num) {
+    int row = 0;
+    while ((row+1) * 8 <= tile_num) {
+        ++row;
+    }
+
+    /* cout << "Row = " << row << ", Tile_num = " << tile_num << "\n"; */
+
+    if (row % 2 == 0) return tile_num % 2 == 0 ? BG_CYAN : BG_BLUE;
+    else              return tile_num % 2 == 0 ? BG_BLUE : BG_CYAN;
 }

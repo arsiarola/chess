@@ -1,4 +1,4 @@
-src = $(shell find -type f -name '*.cpp')
+src = $(shell find -not -path '*/\.*' -type f -name '*.cpp')
 obj = $(src:.cpp=.o)
 
 chess.o: $(obj)

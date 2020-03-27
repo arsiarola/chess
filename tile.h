@@ -7,6 +7,8 @@
 class Board;
 class Piece;
 
+const char* tile_num_to_bg(int tile_num);
+
 class Tile {
 public:
     Tile(int x_ = 0, int y_ = 0, Piece *piece = nullptr);
@@ -19,7 +21,7 @@ public:
     Color get_piece_color();
     int get_tile_num() { return tile_num; }
     std::string get_piece_name();
-    
+
     void assign_tile(Tile *tile);
     void switch_tiles(Tile *tile);
     void move(Tile &to, Board &board);
@@ -28,5 +30,6 @@ private:
     int y;
     int tile_num;
     Piece *piece;
+    void print_padding() const;
 };
 #endif

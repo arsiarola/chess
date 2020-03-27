@@ -16,12 +16,12 @@ King::King(Color color_) {
 void King::move(Tile &from, Tile &destination, Board &board) {
     int x_diff = get_x_diff(from, destination);
     int y_diff = get_y_diff(from, destination); // - move up and + move down
-    
+
     int from_tile = from.get_tile_num();
     int dest_tile = destination.get_tile_num();
 
     if (abs(x_diff) > 1 || abs(y_diff) > 1) {
-	throw "King can only move one step";
+        throw "King can only move one step";
     }
 
     if (board.has_piece(dest_tile) &&
@@ -30,5 +30,5 @@ void King::move(Tile &from, Tile &destination, Board &board) {
     }
 
     board.assign_tile_by_tile_nums(from_tile, dest_tile);
-    
+
 }

@@ -27,17 +27,20 @@ Color Tile::get_piece_color() {
 void Tile::print() const {
     // empty tile
     if (piece == nullptr) {
-        for (int i = 0; i < BLOCK_WIDTH; ++i) {
+        for (int i = 0; i < TILE_WIDTH; ++i) {
             print_padding();
         }
         return;
     }
 
-    for (int i = 0; i < BLOCK_WIDTH / 2; ++i) {
+    for (int i = 0; i < TILE_HOR_PAD; ++i) {
         print_padding();
     }
     piece->print(tile_num);
-    for (int i = 0; i < BLOCK_WIDTH / 2; ++i) {
+
+    // The minus has to be here because if the block width is even number
+    // it means we would otherwise print even_number / 2 + the piece which is too much
+    for (int i = 0; i < TILE_HOR_PAD - (TILE_WIDTH % 2 == 0 ? 1 : 0) ; ++i) {
         print_padding();
     }
 
@@ -48,8 +51,7 @@ void Tile::print() const {
 
 void Tile::print_padding() const {
     change_colors(tile_num_to_bg(tile_num));
-    cout << " ";
-    change_colors(RESET);
+    cout << " " << RESET;
 }
 
 int Tile::get_x() const {

@@ -19,6 +19,7 @@ class Piece {
 public:
     Piece(std::string = "", Color color = black);
     Piece(const Piece &piece);
+    virtual ~Piece() { };
     // remember to declace all virtual functions like here we have "= 0"
     //other wise will get weird undefined reference to vtable
     virtual void move(Tile &from ,Tile &to, Board &board) = 0;

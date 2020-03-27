@@ -15,8 +15,11 @@
 #define MAX_TILE_NUM 63
 #define MIN_TILE_NUM 0
 
-#define BLOCK_WIDTH 5
-#define BLOCK_HEIGHT 3
+#define TILE_HOR_PAD 4
+#define TILE_WIDTH (TILE_HOR_PAD  * 2 + 1)
+#define TILE_VER_PAD 2
+#define TILE_HEIGHT (TILE_VER_PAD* 2 + 1)
+
 
 #define BLACK_ROOK(num)   ((num) == 0 || (num) == 7   ? true : false)
 #define BLACK_KNIGHT(num) ((num) == 1 || (num) == 6   ? true : false)

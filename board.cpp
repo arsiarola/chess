@@ -283,25 +283,26 @@ void Board::assign_tile_by_tile_nums(int from_tile, int dest_tile) {
 
 // print horisontal wall that is the width of the board by separators
 void Board::print_wall(int row) {
-    cout << "   "; // this separation between board and block number
-    for (int i = 0; i < BOARD_WIDTH; ++i) {
-        for (int j = 0; j < BLOCK_WIDTH; ++j) {
+    for (int y = 0; y < TILE_VER_PAD; ++y) {
+        cout << "   "; // this separation between board and block number
+        for (int i = 0; i < BOARD_WIDTH; ++i) {
+            for (int j = 0; j < TILE_HOR_PAD * 2 + 1; ++j) {
                 print_separator(i + 8 * row);
+            }
         }
+        cout << "\n";
     }
-    cout << "\n";
 }
 
 // print a row of the horisintal coordinates matching the width of the
 // board and the correspondig tiles
 void Board::print_letter_row() {
     char A = 'A';
-    cout << " ";
-    for (int j = 0; j < BLOCK_WIDTH / 2; ++j) cout << " ";
+    cout << "   ";
     for (char i = A; i < A + BOARD_WIDTH; ++i) {
-        for (int j = 0; j < BLOCK_WIDTH / 2; ++j) cout << " ";
+        for (int j = 0; j < TILE_HOR_PAD; ++j) cout << " ";
         cout << i;
-        for (int j = 0; j < BLOCK_WIDTH / 2; ++j) cout << " ";
+        for (int j = 0; j < TILE_HOR_PAD; ++j) cout << " ";
     }
     cout << "\n";
 }
